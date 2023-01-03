@@ -12,4 +12,12 @@ Este repositorio contiene la aplicación web y la aplicación movil nativa para 
 Se divide el proyecto por carpetas:
     BackEnd
     FrontEnd Web
-    FrontEnd Movil
+    FrontEnd App
+
+
+Mongo atlas:  
+
+mongodb+srv://admin:<password>@cluster0.dnskw8h.mongodb.net/?retryWrites=true&w=majority
+
+mongodb+srv://admin:<password>@cluster0.dnskw8h.mongodb.net/test
+
