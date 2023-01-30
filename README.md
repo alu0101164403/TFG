@@ -21,3 +21,21 @@ mongodb+srv://admin:<password>@cluster0.dnskw8h.mongodb.net/?retryWrites=true&w=
 
 mongodb+srv://admin:<password>@cluster0.dnskw8h.mongodb.net/test
 
+
+
+Bibliografia:
+
+https://www.bezkoder.com/node-express-mongodb-crud-rest-api/
+
+https://www.bezkoder.com/node-js-mongodb-auth-jwt/
+
+https://mongoosejs.com/docs/guide.html#strictQuery
+
+
+
+
+
+https://wanago.io/2018/12/03/typescript-express-tutorial-routing-controllers-middleware/
+
+
+

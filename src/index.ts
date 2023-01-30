@@ -7,7 +7,7 @@ import * as mongoose from "mongoose";
 import { AddressInfo } from "net";
 
 import db from "./config/db.config";
-
+import { userRouter } from "./routes";
 
 const app = express();
 
@@ -32,8 +32,11 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 // simple route
 app.get("/", (_, res) => {
-    res.send("Hola, esto es el backend." );
+    res.send("Hola, esto es el backend.");
 });
+
+// api rest
+app.use("/user", userRouter);
 
 
 // set port and url, listen for requests (puerto u url del backend)
