@@ -10,6 +10,8 @@ import db from "./config/db.config";
 import{ 
     userRouter,
     transactionRouter,
+    requestRouter,
+    walletRouter
 } from "./routes";
 
 const app = express();
@@ -41,6 +43,9 @@ app.get("/", (_, res) => {
 // api rest
 app.use("/user", userRouter);
 app.use("/transaction", transactionRouter);
+app.use("/request", requestRouter);
+app.use("/wallet", walletRouter);
+
 
 
 // set port and url, listen for requests (puerto u url del backend)

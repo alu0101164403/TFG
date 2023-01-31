@@ -1,4 +1,4 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Schema, model } from 'mongoose';
 
 
 export interface RequestDocument extends mongoose.Document {
@@ -25,7 +25,7 @@ const RequestSchema = new Schema<RequestDocument>({
 		require: true,
 	},
 	owner: {
-		type: mongoose.Schema.Types.ObjectId,
+		type: String,
 		require: true,
 	},
 	category: {
@@ -34,4 +34,4 @@ const RequestSchema = new Schema<RequestDocument>({
 });
 
 
-export default RequestSchema;
+export default model<RequestDocument>("Request", RequestSchema);

@@ -1,4 +1,4 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Schema, model } from 'mongoose';
 import TransactionSchema, { TransactionDocument } from './transaction.model';
 
 
@@ -20,4 +20,4 @@ const WalletSchema = new Schema<WalletDocument>({
 });
 
 
-export default WalletSchema;
+export default model<WalletDocument>("Wallet", WalletSchema);

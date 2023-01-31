@@ -1,7 +1,7 @@
 import mongoose, { Schema, model } from 'mongoose';
 import isEmail from 'validator/lib/isEmail';
-import WalletSchema, { WalletDocument } from "./wallet.model";
 import validator from 'validator';
+import walletModel, { WalletDocument } from './wallet.model';
 
 
 export interface UserDocument extends mongoose.Document {
@@ -61,9 +61,8 @@ const UserSchema = new Schema<UserDocument>({
 		default: Date.now,
 	},
 	wallet: {
-		type: WalletSchema,
+		type: mongoose.Schema.Types.ObjectId,
 		ref: "WalletSchema",
-		idWallet: mongoose.Schema.Types.ObjectId, 
 		unique: true,
 	},
 	requests: {
