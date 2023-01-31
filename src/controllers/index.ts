@@ -4,7 +4,9 @@
  */
 
 import * as userController from "./user.controller";
+import * as transactionController from "./transaction.controller";
 
 export {
     userController,
+    transactionController,
 }

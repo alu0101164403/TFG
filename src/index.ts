@@ -7,7 +7,10 @@ import * as mongoose from "mongoose";
 import { AddressInfo } from "net";
 
 import db from "./config/db.config";
-import { userRouter } from "./routes";
+import{ 
+    userRouter,
+    transactionRouter,
+} from "./routes";
 
 const app = express();
 
@@ -37,6 +40,7 @@ app.get("/", (_, res) => {
 
 // api rest
 app.use("/user", userRouter);
+app.use("/transaction", transactionRouter);
 
 
 // set port and url, listen for requests (puerto u url del backend)

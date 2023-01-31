@@ -1,4 +1,4 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Schema, model } from 'mongoose';
 
 export interface TransactionDocument extends mongoose.Document {
 	title: string;
@@ -20,6 +20,7 @@ const TransactionSchema = new Schema<TransactionDocument>({
 	amount: {
 		type: Number,
 		required: true,
+		min: 0,
 	},
 	secondPerson: {
 		type: String,
@@ -27,10 +28,9 @@ const TransactionSchema = new Schema<TransactionDocument>({
 	},
 	date: {
 		type: Date,
-		require: true,
 		default: Date.now,
 	}
 });
 
 
-export default TransactionSchema;
+export default model<TransactionDocument>("Transaction", TransactionSchema);

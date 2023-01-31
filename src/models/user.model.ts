@@ -67,8 +67,9 @@ const UserSchema = new Schema<UserDocument>({
 		unique: true,
 	},
 	requests: {
-		type: [mongoose.Schema.Types.ObjectId],
+		type: [mongoose.Schema.Types.ObjectId],                        
 		ref: "Request",
+		default: [],
 	},
 	score: {
 		type: Number,

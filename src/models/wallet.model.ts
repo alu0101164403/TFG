@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import TransactionSchema, { TransactionDocument } from './history.model';
+import TransactionSchema, { TransactionDocument } from './transaction.model';
 
 
 export interface WalletDocument extends mongoose.Document {
@@ -14,7 +14,7 @@ const WalletSchema = new Schema<WalletDocument>({
     min: 0,
   },
   history: {
-    type: [TransactionSchema],
+    type: [mongoose.Schema.Types.ObjectId],
     ref: "TransactionSchema",
   }
 });
