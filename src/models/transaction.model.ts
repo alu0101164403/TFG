@@ -2,7 +2,7 @@ import mongoose, { Schema, model } from 'mongoose';
 
 export interface TransactionDocument extends mongoose.Document {
 	title: string;
-	type: ("sale" | "buy");
+	type: ("sale" | "buy" | "initial");
 	amount: number;
 	secondPerson: string;
 	date: Date;

@@ -1,14 +1,23 @@
 import { Request, Response } from "express";
 import { walletServices as wallet } from "../services";
 import WalletSchema, { WalletDocument } from "../models/wallet.model";
-import mongoose, { ObjectId } from "mongoose";
+import mongoose from "mongoose";
+import { transactionServices as transaction } from "../services";
+import TransactionSchema, { TransactionDocument } from "../models/transaction.model";
 
 
 // CREATE 
 let create = async (req: Request, res: Response) => {	
 	try {
-		const { type, title, amount, secondPerson} = req.body;
-		const newWallet: WalletDocument = new WalletSchema ({});
+		const transactionCreated: TransactionDocument = await transaction.create(new TransactionSchema ({
+      type: "initial",
+			title: "Bienvenido. Estas son tus monedas iniciales.",
+			amount: 30,
+			secondPerson: "LogoApp",
+		}));
+		const newWallet: WalletDocument = new WalletSchema ({
+			history: [transactionCreated._id],
+		});
 		await wallet.create(newWallet);
 		res.status(201).send({ message: "Succesfull created wallet." });
 	} catch (error) {

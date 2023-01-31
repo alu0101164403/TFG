@@ -1,25 +1,40 @@
 import { Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import jwt from 'jsonwebtoken';
-import { userServices as user } from "../services";
 import UserSchema, { UserDocument } from "../models/user.model";
+import WalletSchema, { WalletDocument } from "../models/wallet.model";
+import TransactionSchema, { TransactionDocument } from "../models/transaction.model";
 import mongoose, { ObjectId } from "mongoose";
 import config from "../config/auth.config";
+import { userServices as user } from "../services";
+import { walletServices as wallet } from "../services";
+import { transactionServices as transaction } from "../services";
 
 
 // CREATE NEW USER
 let register = async (req: Request, res: Response) => {	
 	try {
-		const { username, email, credential} = req.body;
+		const { username, email, credential } = req.body;
 		// cifrar contraseña
-		const salt = await bcrypt.genSalt(10);
-		const password = await bcrypt.hash(req.body.password, salt);
+		const salt: string = await bcrypt.genSalt(10);
+		const password:string = await bcrypt.hash(req.body.password, salt);
+		//
+		const transactionCreated: TransactionDocument = await transaction.create(new TransactionSchema ({
+      type: "initial",
+			title: "Bienvenido. Estas son tus monedas iniciales.",
+			amount: 30,
+			secondPerson: "LogoApp",
+		}));
+		const walletCreated: WalletDocument = await wallet.create(new WalletSchema ({
+			history: [transactionCreated._id],
+		}));
 		//
 		const newUser: UserDocument = new UserSchema ({
 			username,
 			email,
 			credential,
 			password,
+			wallet: walletCreated._id,
 		});
 		await user.create(newUser);
 		res.status(201).send({ message: "Succesfull created user." });
