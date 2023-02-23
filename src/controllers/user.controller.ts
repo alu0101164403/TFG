@@ -11,7 +11,7 @@ import { walletServices as wallet } from "../services";
 import { transactionServices as transaction } from "../services";
 
 
-// CREATE NEW USER
+// POST
 let register = async (req: Request, res: Response) => {	
 	try {
 		const { username, email, credential } = req.body;
@@ -43,20 +43,14 @@ let register = async (req: Request, res: Response) => {
 	}
 }
 
-// GET ALL USERS
-let getUsers = async (req: Request, res: Response) => {
-	try {
-		const users = await user.getUsers();
-		res.status(200).send(users);
-	} catch (error) {
-		res.status(500).json({ status: 500, message: error.message });
-	}
-}
 
-// DELETE USER
+// DELETE 
 let deleteUser = async (req: Request, res: Response) => {
 	try {
 		const { id } = req.params;
+		// eliminar un usuario elimina su cartera y sus requests
+		const userFound = await user.findUser(new mongoose.Schema.Types.ObjectId(id));
+
 		await user.deleteUser(new mongoose.Schema.Types.ObjectId(id));
 		res.status(200).send({message: "User was deleted successfully!"});
 	} catch (error) {
@@ -64,7 +58,7 @@ let deleteUser = async (req: Request, res: Response) => {
 	}
 }
 
-// DELETE USERS
+
 let deleteAllUsers = async (req: Request, res: Response) => {
 	try {
 		const count = await user.deleteAllUsers();
@@ -74,7 +68,7 @@ let deleteAllUsers = async (req: Request, res: Response) => {
 	}
 }
 
-// FIND USER
+// GET
 let findUser = async (req: Request, res: Response) => {
 	try {
 		const { id } = req.params;
@@ -85,7 +79,15 @@ let findUser = async (req: Request, res: Response) => {
 	}
 }
 
-// FIND USER
+let getUsers = async (req: Request, res: Response) => {
+	try {
+		const users = await user.getUsers();
+		res.status(200).send(users);
+	} catch (error) {
+		res.status(500).json({ status: 500, message: error.message });
+	}
+}
+
 let findUserByName = async (req: Request, res: Response) => {
 	try {
 		const { username } = req.params;
@@ -96,7 +98,7 @@ let findUserByName = async (req: Request, res: Response) => {
 	}
 }
 
-// FIND USER
+// PATCH
 let modifyUser = async (req: Request, res: Response) => {
 	try {
 		const { id } = req.params;
@@ -107,7 +109,7 @@ let modifyUser = async (req: Request, res: Response) => {
 	}
 }
 
-// LOGIN USER
+// LOGIN
 let login = async (req: Request, res: Response) => {
 	try {
 		const { username } =  req.body;
@@ -132,6 +134,7 @@ let login = async (req: Request, res: Response) => {
 							username: userFound.username,
 							email: userFound.email,
 							credential: userFound.credential,
+							requests: userFound.requests,
 						}
 					});
 				}

@@ -18,10 +18,14 @@ const app = express();
 
 // SEREVER ENV-VAR
 const PORT: number = process.env.PORT ? parseInt(process.env.PORT) : 8080;
-const HOST_NAME: string = process.env.URL || 'localhost';
+const HOST_NAME: string = process.env.URL || '127.0.0.1';
 // MONGO ENV-VAR
 const DB_URL = process.env.DB_URL || db.URL;
 
+app.use(function (req, res, next) {
+    console.log('Time:', Date.now());
+    next();
+  });
 
 // cors es una politica para permitir el acceso a los recursos
 app.use(cors());
@@ -37,6 +41,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 // simple route
 app.get("/", (_, res) => {
+    console.log('here')
     res.send("Hola, esto es el backend.");
 });
 
