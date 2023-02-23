@@ -5,8 +5,11 @@
 import http from '../../http-common';
 
 class Authentication {
-  getUser() {
-    return http.get('/user/pepe');
+  register(data) {
+    return http.post('/user/register', data);
+  }
+  login(data) {
+    return http.post('/user/login', data);
   }
 }
 
