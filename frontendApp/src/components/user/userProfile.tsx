@@ -11,6 +11,7 @@ const UserPerfil = ({navigation}) => {
 
   const handleLogout = () => {
     logout();
+    navigation.navigate('Login');
   };
 
   return (
@@ -50,7 +51,7 @@ const UserPerfil = ({navigation}) => {
           <TouchableOpacity style={styles.stylesBtm.btmSinBorde} onPress={() => navigation.navigate('Home')}>
             <Text>Cenjear monedas</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.stylesBtm.btmSinBorde} onPress={() => handleLogout}>
+          <TouchableOpacity style={styles.stylesBtm.btmSinBorde} onPress={() => handleLogout()}>
             <Text>Cerrar Sesión</Text>
           </TouchableOpacity>
         </View>

@@ -9,8 +9,8 @@ const AuthProvider = ({children}) => {
   };
 
   const logout = () => {
-    setUser(null);
     console.log('Logout');
+    setUser(null);
   };
 
   return (
