@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   Text,
   View,
@@ -8,21 +8,26 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import styles from '../styles';
-import Auth from '../services/auth-services';
+import styles from '../../styles';
+import Auth from '../../services/auth-services';
+import {AuthContext} from '../../context/auth.context';
 
 const Login = ({navigation}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const {login} = useContext(AuthContext);
 
-  const handleSubmitPress = () => {
+
+  const handleSubmitPress = async () => {
     const data = {
       username: username,
       password: password,
     };
-    Auth.login(data).then( () => {
-      navigation.navigate('Home');
+    await Auth.login(data).then( dataLogin => {
+      login(dataLogin);
+      console.log(dataLogin);
+      navigation.navigate('Profile');
     }).catch(_err => {
       console.log(_err);
     });
@@ -30,7 +35,7 @@ const Login = ({navigation}) => {
 
   return (
     <View style={styles.stylesContainer.container}>
-      <Image style={styles.stylesImage.logo} source={require('../assets/logoSFtfg.png')} />
+      <Image style={styles.stylesImage.logo} source={require('../../assets/logoSFtfg.png')} />
       <View style={styles.stylesText.inputView}>
         <TextInput
           style={styles.stylesText.textInput}

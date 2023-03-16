@@ -8,8 +8,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import styles from '../styles';
-import Auth from '../services/auth-services';
+import styles from '../../styles';
+import Auth from '../../services/auth-services';
 
 const Register = ({navigation}) => {
   const [username, setUsername] = useState('');
@@ -35,7 +35,7 @@ const Register = ({navigation}) => {
 
   return (
     <View style={styles.stylesContainer.container}>
-      <Image style={styles.stylesImage.logo} source={require('../assets/logoSFtfg.png')} />
+      <Image style={styles.stylesImage.logo} source={require('../../assets/logoSFtfg.png')} />
       <View style={styles.stylesText.inputView}>
         <TextInput
           style={styles.stylesText.textInput}

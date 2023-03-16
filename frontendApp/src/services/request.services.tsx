@@ -4,17 +4,17 @@
 
 import http from '../../http-common';
 
-const register = (data) => {
-  return http.post('/user/register', data);
+const saveRequest = (data) => {
+  return http.post('/request/', data);
 };
 
-const login = (data) => {
-  return http.post('/user/login', data);
+const getRequest = (data) => {
+  return http.get('/request/', data);
 };
 
 const AuthService = {
-  register,
-  login,
+  saveRequest,
+  getRequest,
 };
 
 export default AuthService;

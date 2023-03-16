@@ -43,6 +43,19 @@ const stylesBtm = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#E47272',
   },
+  btmTouchableCoins: {
+    flexDirection: 'row',
+  },
+  btmModalRequest: {
+    width: '40%',
+    borderRadius: 25,
+    height: 45,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 15,
+    borderWidth: 1,
+    borderColor: '#E47272',
+  },
 });
 
 export default stylesBtm;
