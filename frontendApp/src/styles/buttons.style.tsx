@@ -56,6 +56,10 @@ const stylesBtm = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#E47272',
   },
+  btmNAV: {
+    marginRight: 20,
+    marginLeft: 20,
+  },
 });
 
 export default stylesBtm;

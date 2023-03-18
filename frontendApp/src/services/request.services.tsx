@@ -8,8 +8,9 @@ const saveRequest = (data) => {
   return http.post('/request/', data);
 };
 
-const getRequest = (data) => {
-  return http.get('/request/', data);
+const getRequest = async (data) => {
+  const datareq = await http.get('/request/', data);
+  return datareq.data.data;
 };
 
 const AuthService = {

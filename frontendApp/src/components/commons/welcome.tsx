@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import {Button} from '@rneui/themed';
 
-import styles from '../styles';
+import styles from '../../styles';
 
 const Welcome = ({navigation}) => {
   return (

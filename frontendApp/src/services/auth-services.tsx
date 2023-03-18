@@ -8,8 +8,9 @@ const register = (data) => {
   return http.post('/user/register', data);
 };
 
-const login = (data) => {
-  return http.post('/user/login', data);
+const login = async (data) => {
+  const dataUser = await http.post('/user/login', data);
+  return dataUser.data.data;
 };
 
 const AuthService = {

@@ -44,14 +44,13 @@ const styleContainers = StyleSheet.create({
     margin: 1,
   },
   containerHistory: {
-    flex: 0.1,
+    flex: 1,
     backgroundColor: '#D9D9D9',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
     marginBottom: 5,
-    padding: 15,
-    margin: 1,
+    padding: 5,
   },
   containerButtons: {
     flexDirection: 'row',
@@ -68,6 +67,13 @@ const styleContainers = StyleSheet.create({
     marginBottom: 20,
     alignItems: 'center',
   },
+  containerNav: {
+    flex: 0.1,
+    backgroundColor: '#E47272',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
 });
-
+//5F9EA0
 export default styleContainers;

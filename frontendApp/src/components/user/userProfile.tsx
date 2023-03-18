@@ -5,9 +5,11 @@ import {View, Text, TouchableOpacity} from 'react-native';
 
 import styles from '../../styles';
 import {AuthContext} from '../../context/auth.context';
+import Components from '../';
+
 
 const UserPerfil = ({navigation}) => {
-  const {logout} = useContext(AuthContext);
+  const {user, wallet, logout} = useContext(AuthContext);
 
   const handleLogout = () => {
     logout();
@@ -15,20 +17,19 @@ const UserPerfil = ({navigation}) => {
   };
 
   return (
-    <View style={styles.stylesContainer.container}>
-
+    <><View style={styles.stylesContainer.container}>
       <View style={styles.stylesContainer.containerProfileTop}>
         <Image style={styles.stylesImage.profileImageUser} source={require('../../assets/userPerfil.png')} />
         <View style={styles.stylesContainer.containerDataUser}>
-          <Text style={styles.stylesText.textDataUser}>UserPepe</Text>
-          <Text style={styles.stylesText.textDataUser}>UserPepe@gmail.com</Text>
+          <Text style={styles.stylesText.textDataUser}>{user.username}</Text>
+          <Text style={styles.stylesText.textDataUser}>{user.email}</Text>
           <Text>Number starts</Text>
         </View>
       </View>
       <View style={styles.stylesContainer.containerCoins}>
         <TouchableOpacity style={styles.stylesBtm.btmTouchableCoins} onPress={() => navigation.navigate('Wallet')}>
           <Text style={styles.stylesText.text}>Mi cartera</Text>
-          <Text style={styles.stylesText.textNumberProfile}>45</Text>
+          <Text style={styles.stylesText.textNumberProfile}>{wallet.coins}</Text>
           <Image style={{ width: 20, height: 20 }} source={require('../../assets/logoSFtfg.png')} />
         </TouchableOpacity>
       </View>
@@ -56,8 +57,7 @@ const UserPerfil = ({navigation}) => {
           </TouchableOpacity>
         </View>
       </View>
-
-    </View>
+    </View><Components.AppNavigator navigation={navigation} /></>
   );
 };
 

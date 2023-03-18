@@ -7,73 +7,62 @@ import {
   TextInput,
   TouchableOpacity,
   Modal,
-  Alert,
 } from 'react-native';
 //import {CheckBox} from 'react-native-elements';
 
-import styles from '../styles';
-import requestServices from '../services/request.services';
-import {AuthContext} from '../context/auth.context';
+import styles from '../../styles';
+import requestServices from '../../services/request.services';
+import { AuthContext } from '../../context/auth.context';
 
 
-const Home = ({navigation}) => {
+const ModalRequest = ({visible, onClose}) => {
   const {user} = useContext(AuthContext);
 
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
-  const [modalVisible, setModalVisible] = useState(false);
 
   const handleFormSubmit = () => {
     const data = {
-      owner: user.data.data.username,
+      owner: user.username,
       category: 'offer',
       title: title,
       description: description,
     };
     requestServices.saveRequest(data).then( () => {
-      setModalVisible(!modalVisible);
+      onClose();
     }).catch(_err => {
       console.log(_err);
     });
   };
 
+
   return (
-    <View>
-      <TouchableOpacity onPress={() => setModalVisible(true)}>
-        <Text>Añadir una solicitud</Text>
-      </TouchableOpacity>
       <Modal
+        visible={visible}
         animationType="slide"
-        transparent={false}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
-        }}>
+        transparent={false}>
         {/* Contenido del formulario */}
         <View style={styles.stylesContainer.container}>
           <View style={styles.stylesText.inputViewDisable}>
             <TextInput
               style={styles.stylesText.textInput}
               editable={false}
-              placeholder={"Usuario: " + user.data.data.username}
-              placeholderTextColor="#AAAAAA"
-            />
+              placeholder={"Usuario: " + user.username}
+              placeholderTextColor="#AAAAAA" />
           </View>
           <View style={styles.stylesText.inputViewDisable}>
             <TextInput
               style={styles.stylesText.textInput}
               editable={false}
-              placeholder={"Email: " + user.data.data.email}
-              placeholderTextColor="#AAAAAA"
-            />
+              placeholder={"Email: " + user.email}
+              placeholderTextColor="#AAAAAA" />
           </View>
           <View style={styles.stylesText.inputView}>
             <TextInput
               style={styles.stylesText.textInput}
               placeholder="Título"
               placeholderTextColor="#97E4FD"
-              onChangeText={titleInput => setTitle(titleInput)}
-            />
+              onChangeText={titleInput => setTitle(titleInput)} />
           </View>
           <View style={styles.stylesText.textArea}>
             <TextInput
@@ -83,24 +72,22 @@ const Home = ({navigation}) => {
               numberOfLines={100}
               placeholder="Descripción"
               placeholderTextColor="#97E4FD"
-              onChangeText={descriptionInput => setDescription(descriptionInput)}
-            />
+              onChangeText={descriptionInput => setDescription(descriptionInput)} />
           </View>
-            {/* Botones salida formulario */}
+          {/* Botones salida formulario */}
           <View style={styles.stylesContainer.containerButtons}>
             <TouchableOpacity style={styles.stylesBtm.btmModalRequest}
-              onPress={() => {setModalVisible(!modalVisible);}}>
+              onPress={() => { onClose(); } }>
               <Text>Cerrar</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.stylesBtm.btmModalRequest}
-              onPress={() => {handleFormSubmit();}}>
+              onPress={() => { handleFormSubmit(); } }>
               <Text>Añadir</Text>
             </TouchableOpacity>
           </View>
         </View>
       </Modal>
-    </View>
   );
 };
 
-export default Home;
+export default ModalRequest;

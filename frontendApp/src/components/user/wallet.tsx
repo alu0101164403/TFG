@@ -1,39 +1,69 @@
 /* eslint-disable prettier/prettier */
 import { Image } from '@rneui/base';
-import React from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import {View, Text, ScrollView} from 'react-native';
+//import { useFocusEffect } from '@react-navigation/native';
 
 import styles from '../../styles';
+import {AuthContext} from '../../context/auth.context';
+import Components from '../../components';
+import TransactionService from '../../services/transaction.services';
 
-const Wallet = () => {
+const Wallet = ({navigation}) => {
+  const {user, wallet} = useContext(AuthContext);
+  const [history, setHistory] = useState([]);
+
+  useEffect(() => {
+    async function getRequestsUser () {
+      let historyUser : [];
+      historyUser = wallet.history.map((id: String) => {
+        try {
+          const data = TransactionService.getTransaction(id);
+          return data;
+        } catch (err) {
+          return err;
+        }
+      });
+      historyUser = await Promise.all(historyUser);
+      setHistory(historyUser);
+    }
+    getRequestsUser();
+  }, [wallet.history]);
+
   return (
-    <View style={styles.stylesContainer.container}>
+    <><View style={styles.stylesContainer.container}>
 
       <View style={styles.stylesContainer.containerProfileTop}>
         <Image style={styles.stylesImage.profileImageUser} source={require('../../assets/logoSFtfg.png')} />
         <View style={styles.stylesContainer.containerDataUser}>
-          <Text style={styles.stylesText.textDataUser}>UserPepe</Text>
-          <Text style={styles.stylesText.textDataUser}>UserPepe@gmail.com</Text>
+          <Text style={styles.stylesText.textDataUser}>{user.username}</Text>
+          <Text style={styles.stylesText.textDataUser}>{user.email}</Text>
           <Text>Number starts</Text>
         </View>
       </View>
       <View style={styles.stylesContainer.containerCoins}>
-          <Text style={styles.stylesText.text}>Mi cartera</Text>
-          <Text style={styles.stylesText.textNumberProfile}>45</Text>
-          <Image style={{width: 20, height: 20}} source={require('../../assets/logoSFtfg.png')} />
+        <Text style={styles.stylesText.text}>Mi cartera</Text>
+        <Text style={styles.stylesText.textNumberProfile}>{wallet.coins}</Text>
+        <Image style={{ width: 20, height: 20 }} source={require('../../assets/logoSFtfg.png')} />
       </View>
 
       <ScrollView style={styles.stylesContainer.scroll}>
-      <View style={styles.stylesContainer.container}>
-          <View style={styles.stylesContainer.containerHistory}>
-            <Text style={styles.stylesText.textProfileRequest}>{'Menu vegano'} por {'Pepe'}</Text>
-            <Text style={styles.stylesText.textNumberProfile}>3/05/2023</Text>
-            <Text style={styles.stylesText.textNumberProfile}>+ 5</Text>
-          </View>
-        </View>
+        {
+          history.map(item => {
+            return (
+              <View style={styles.stylesContainer.container}>
+                <View style={styles.stylesContainer.containerHistory}>
+                  <Text style={styles.stylesText.textProfileRequest}>{item.title}</Text>
+                  <Text style={styles.stylesText.textProfileRequest}>{(item.type === 'initial' || item.type === 'offer') ? item.secondPerson : user.username}</Text>
+                  <Text style={styles.stylesText.textNumberProfile}>{item.date.toString().substring(0 ,10)}</Text>
+                  <Text style={styles.stylesText.textNumberProfile}>{(item.type === 'initial' || item.type === 'offer') ? '+' + item.amount : '-' + item.amount}</Text>
+                </View>
+              </View>
+            );
+          })
+        }
       </ScrollView>
-
-    </View>
+    </View><Components.AppNavigator navigation={navigation} /></>
   );
 };
 

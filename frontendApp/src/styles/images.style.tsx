@@ -16,6 +16,10 @@ const stylesImages = StyleSheet.create({
     width: 80,
     height: 80,
   },
+  icon: {
+    width: 35,
+    height: 35,
+  },
 });
 
 export default stylesImages;
