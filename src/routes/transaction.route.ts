@@ -10,7 +10,7 @@ transactionRouter
     .get(transaction.getAll);
 
 transactionRouter
-  .route("/:id")
+  .route("/id/:id")
     .delete(transaction.deleteOne)
     .get(transaction.find)
     .patch(transaction.modify);

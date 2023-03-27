@@ -10,11 +10,14 @@ requestRouter
     .get(request.getAll);
 
 requestRouter
-  .route("/:id")
+  .route("/id/:id")
     .delete(request.deleteOne)
     .get(request.find)
     .patch(request.modify);
 
+requestRouter
+  .route("/owner/:id")
+    .get(request.findByUser);
 
 export {
   requestRouter

@@ -7,7 +7,7 @@ let create = async (request: RequestDocument) => {
 	try {
     return await request.save();
   } catch (error) {
-    throw Error(`${error}`);
+    throw Error(`Error al crear Request: ${error}`);
   }
 }
 
@@ -37,9 +37,15 @@ let deleteOne = async (id: ObjectId) => {
   }
 }
 
-let deleteAll = async () => {
+let deleteAll = async (id?: ObjectId) => {
 	try {
-    return (await RequestSchema.deleteMany()).deletedCount;
+    if(id) {
+      console.log('deleteServic- owner', id)
+      return (await RequestSchema.deleteMany({ owner: id})).deletedCount;
+    } else {
+      console.log('todas')
+      return (await RequestSchema.deleteMany()).deletedCount;
+    }
   } catch (error) {
     throw Error(`${error}`);
   }

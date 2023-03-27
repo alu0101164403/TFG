@@ -32,16 +32,15 @@ app.use(cors());
 
 // parse requests of content-type - application/json
 // bodyparse permite el acceso al contenido del body 
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 // parse requests of content-type - application/x-www-form-urlencoded
 // con false se usa la libreria querystring, a true se usaria qs
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 
 
 // simple route
 app.get("/", (_, res) => {
-    console.log('here')
     res.send("Hola, esto es el backend.");
 });
 

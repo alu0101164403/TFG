@@ -12,7 +12,7 @@ export interface UserDocument extends mongoose.Document {
 	password: string,
 	date: Date;
 	wallet: WalletDocument;
-	requests: [mongoose.Schema.Types.ObjectId];
+	requests: [mongoose.Types.ObjectId];
 	score: number;
 }
 
@@ -62,7 +62,7 @@ const UserSchema = new Schema<UserDocument>({
 	},
 	wallet: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: "WalletSchema",
+		ref: "Wallet",
 		unique: true,
 	},
 	requests: {

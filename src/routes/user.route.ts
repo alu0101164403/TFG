@@ -5,25 +5,24 @@ const userRouter = Router();
 
 userRouter
   .route("/")
-    .get(user.getUsers)
+    .get(user.getAllUsers)
     .delete(user.deleteAllUsers);
 
 userRouter
-  .route("/:username")
-    .get(user.findUserByName)
+  .route("/username/:username")
+    .get(user.findUserByName);
 
 userRouter
-  .route("/:id")
-    .delete(user.deleteUser)
-    .get(user.findUser)
+  .route("/id/:id")
+    .delete(user.deleteUserById)
+    .get(user.findUserById)
     .patch(user.modifyUser);
 
-userRouter
+    userRouter
   .post("/register", user.register);
 
 userRouter
   .post("/login", user.login);
-
 
 export {
   userRouter

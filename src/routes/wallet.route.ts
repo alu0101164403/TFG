@@ -10,7 +10,7 @@ walletRouter
     .get(wallet.getAll);
 
 walletRouter
-  .route("/:id")
+  .route("/id/:id")
     .delete(wallet.deleteOne)
     .get(wallet.find)
     .patch(wallet.modify);

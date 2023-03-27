@@ -5,8 +5,10 @@ export interface RequestDocument extends mongoose.Document {
 	type: ("request" | "offer");
 	title: string;
 	description: string;
-	owner: mongoose.Schema.Types.ObjectId;
+	owner: {id: mongoose.Types.ObjectId, username: string};
 	category: String;
+	price: number;
+	date: Date;
 }
 
 
@@ -25,11 +27,22 @@ const RequestSchema = new Schema<RequestDocument>({
 		require: true,
 	},
 	owner: {
-		type: String,
+		type: {id: mongoose.Types.ObjectId, username: String},
+		ref: 'User',
 		require: true,
 	},
 	category: {
 		type: String,
+	},
+	price: {
+		type: Number,
+		require: true,
+		default: 0,
+		min: 0,
+	},
+	date: {
+		type: Date,
+		default: Date.now,
 	}
 });
 

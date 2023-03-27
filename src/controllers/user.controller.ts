@@ -9,7 +9,8 @@ import config from "../config/auth.config";
 import { userServices as user } from "../services";
 import { walletServices as wallet } from "../services";
 import { transactionServices as transaction } from "../services";
-
+import { requestServices as request } from "../services";
+import RequestSchema, { RequestDocument } from "../models/request.model";
 
 // POST
 let register = async (req: Request, res: Response) => {	
@@ -44,13 +45,58 @@ let register = async (req: Request, res: Response) => {
 }
 
 
+
+// LOGIN
+let login = async (req: Request, res: Response) => {
+	try {
+		const { username } =  req.body;
+		const userFound: UserDocument | null = await user.findUserByName(username);
+
+		if (userFound === null) {
+			res.status(400).json({ error: 'User not found.' });
+		} else {
+			bcrypt.compare(req.body.password, userFound.password, async function(err) {
+				if (err) {
+					res.status(403).json({ message: err });
+				} else {
+					const token = jwt.sign({
+						name: userFound.username,
+						id: userFound._id,
+					}, config.secret, {
+						expiresIn: config.jwtExpiration,
+					});
+					res.status(200).header('x-access-token', token).json({
+						data: {
+							accessToken: token,
+							id: userFound._id,
+							username: userFound.username,
+							email: userFound.email,
+							credential: userFound.credential,
+							requests: userFound.requests,
+							wallet: userFound.wallet,
+						}
+					});
+				}
+			});
+		}
+	} catch (error) {
+		res.status(500).json({ status: 500, message: error.message });
+	}
+}
+
+
+
 // DELETE 
-let deleteUser = async (req: Request, res: Response) => {
+let deleteUserById = async (req: Request, res: Response) => {
 	try {
 		const { id } = req.params;
 		// eliminar un usuario elimina su cartera y sus requests
 		const userFound = await user.findUser(new mongoose.Schema.Types.ObjectId(id));
-
+		if (!userFound) {
+      return res.status(404).send();
+    }
+		await wallet.deleteOne(userFound.wallet.id);
+		await RequestSchema.deleteMany({owner: id});
 		await user.deleteUser(new mongoose.Schema.Types.ObjectId(id));
 		res.status(200).send({message: "User was deleted successfully!"});
 	} catch (error) {
@@ -68,8 +114,10 @@ let deleteAllUsers = async (req: Request, res: Response) => {
 	}
 }
 
+
+
 // GET
-let findUser = async (req: Request, res: Response) => {
+let findUserById = async (req: Request, res: Response) => {
 	try {
 		const { id } = req.params;
 		const userFound = await user.findUser(new mongoose.Schema.Types.ObjectId(id));
@@ -79,7 +127,7 @@ let findUser = async (req: Request, res: Response) => {
 	}
 }
 
-let getUsers = async (req: Request, res: Response) => {
+let getAllUsers = async (req: Request, res: Response) => {
 	try {
 		const users = await user.getUsers();
 		res.status(200).send(users);
@@ -109,51 +157,13 @@ let modifyUser = async (req: Request, res: Response) => {
 	}
 }
 
-// LOGIN
-let login = async (req: Request, res: Response) => {
-	try {
-		const { username } =  req.body;
-		const userFound: UserDocument | null = await user.findUserByName(username);
-
-		if (userFound === null) {
-			res.status(400).json({ error: 'User not found.' });
-		} else {
-			bcrypt.compare(req.body.password, userFound.password, async function(err) {
-				if (err) {
-					res.status(403).json({ message: err });
-				} else {
-					const token = jwt.sign({
-						name: userFound.username,
-						id: userFound._id,
-					}, config.secret, {
-						expiresIn: config.jwtExpiration,
-					});
-					res.status(200).header('x-access-token', token).json({
-						data: {
-							accessToken: token,
-							username: userFound.username,
-							email: userFound.email,
-							credential: userFound.credential,
-							requests: userFound.requests,
-						}
-					});
-				}
-			});
-		}
-	} catch (error) {
-		res.status(500).json({ status: 500, message: error.message });
-	}
-}
-
-
-
 export {
 	register,
-	getUsers,
-	deleteUser,
-	deleteAllUsers,
-	findUser,
+	getAllUsers,
+	findUserById,
 	findUserByName,
+	deleteUserById,
+	deleteAllUsers,
 	modifyUser,
 	login,
 };
