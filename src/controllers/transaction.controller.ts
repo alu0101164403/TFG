@@ -10,9 +10,9 @@ import { WalletDocument } from "../models/wallet.model";
 
 
 const buy = async (req: Request, res: Response) => {
-  const {buyerId, sellerId, requestId} = req.body;
+  const {buyer, sellerId, requestId} = req.body;
   // comprobar existencia usuarios y request
-  let userBuyer = await user.findUserWithWallet(new mongoose.Schema.Types.ObjectId(buyerId));
+  let userBuyer = await user.findUserWithWallet(new mongoose.Schema.Types.ObjectId(buyer.id));
   let userSeller = await user.findUserWithWallet(new mongoose.Schema.Types.ObjectId(sellerId));
   let requestFound = await request.find(new mongoose.Schema.Types.ObjectId(requestId));
 
@@ -30,7 +30,6 @@ const buy = async (req: Request, res: Response) => {
 			let buyerHistory = userBuyer.wallet.history;
 			buyerHistory.push(transactionCreated._id);
 			let buyerWallet = {"coins": userBuyer.wallet.coins - price, "history": buyerHistory}
-
 			//
 			const transactionCreated2: TransactionDocument = await transaction.create(new TransactionSchema ({
 				type: "offer",
@@ -41,10 +40,11 @@ const buy = async (req: Request, res: Response) => {
 			let sellerHistory = userSeller.wallet.history
 			sellerHistory.push(transactionCreated2._id);
 			let sellerWallet = {"coins": userSeller.wallet.coins + price, "history": sellerHistory}
-			await wallet.modify(buyerWallet, userBuyer.wallet._id);
+			const walletUpdated = await wallet.modify(buyerWallet, userBuyer.wallet._id);
 			await wallet.modify(sellerWallet, userSeller.wallet._id);
-
-			res.status(200).send({ message: "Succesfull transfer." });
+			buyer.wallet = walletUpdated;
+			console.log(buyer)
+			res.status(200).send(buyer);
 		} else {
 			res.status(201).send({ message: "No tiene saldo suficiente." });
 		}
