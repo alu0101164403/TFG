@@ -58,7 +58,13 @@ let findUserByName = async (username: string) => {
   }
 }
 
-
+let findUserWithWallet = async (id: ObjectId) => {
+	try {
+    return await UserSchema.findById({ _id: id.path }).populate('wallet');
+  } catch (error) {
+    throw Error(`Usuario no encontrado: ${error}`);
+  }
+}
 
 // PATCH 
 let modifyUser = async (user: UserDocument, id: ObjectId) => {
@@ -94,4 +100,5 @@ export {
   findUser,
   findUserByName,
   addRequestUser,
+  findUserWithWallet,
 }

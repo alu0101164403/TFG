@@ -47,9 +47,9 @@ let deleteAll = async () => {
 
 
 // UPDATE
-let modify = async (wallet: WalletDocument, id: ObjectId) => {
+let modify = async (newWallet: Object, id: string) => {
 	try {
-    return await WalletSchema.findByIdAndUpdate({ _id: id.path }, wallet, { new: false });
+    return await WalletSchema.findByIdAndUpdate({ _id: id }, newWallet, { new: true });
   } catch (error) {
     throw Error(`${error}`);
   }

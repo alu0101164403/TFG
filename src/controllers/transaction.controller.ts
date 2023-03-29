@@ -1,11 +1,61 @@
 import { Request, Response } from "express";
 import { transactionServices as transaction } from "../services";
+import { userServices as user } from "../services";
+import { requestServices as request } from "../services";
+import { walletServices as wallet } from "../services";
+
 import TransactionSchema, { TransactionDocument } from "../models/transaction.model";
-import mongoose, { ObjectId } from "mongoose";
+import mongoose from "mongoose";
+import { WalletDocument } from "../models/wallet.model";
+
+
+const buy = async (req: Request, res: Response) => {
+  const {buyerId, sellerId, requestId} = req.body;
+  // comprobar existencia usuarios y request
+  let userBuyer = await user.findUserWithWallet(new mongoose.Schema.Types.ObjectId(buyerId));
+  let userSeller = await user.findUserWithWallet(new mongoose.Schema.Types.ObjectId(sellerId));
+  let requestFound = await request.find(new mongoose.Schema.Types.ObjectId(requestId));
+
+  if (userBuyer && userSeller && requestFound) {
+    // comrpobar saldo comprador
+    const {price, type, title} = requestFound;
+    if (userBuyer.wallet.coins >= price && type === "offer") {
+			// realizar transferencia
+			const transactionCreated: TransactionDocument = await transaction.create(new TransactionSchema ({
+				type: "request",
+				title: title,
+				amount: price,
+				secondPerson: userSeller.username,
+			}));
+			let buyerHistory = userBuyer.wallet.history;
+			buyerHistory.push(transactionCreated._id);
+			let buyerWallet = {"coins": userBuyer.wallet.coins - price, "history": buyerHistory}
+
+			//
+			const transactionCreated2: TransactionDocument = await transaction.create(new TransactionSchema ({
+				type: "offer",
+				title: title,
+				amount: price,
+				secondPerson: userBuyer.username,
+			}));
+			let sellerHistory = userSeller.wallet.history
+			sellerHistory.push(transactionCreated2._id);
+			let sellerWallet = {"coins": userSeller.wallet.coins + price, "history": sellerHistory}
+			await wallet.modify(buyerWallet, userBuyer.wallet._id);
+			await wallet.modify(sellerWallet, userSeller.wallet._id);
+
+			res.status(200).send({ message: "Succesfull transfer." });
+		} else {
+			res.status(201).send({ message: "No tiene saldo suficiente." });
+		}
+  } else {
+    res.status(201).send({ message: "Ha ocurrido un error en el proceso." });
+  }
+}
 
 
 // CREATE 
-let create = async (req: Request, res: Response) => {	
+let create = async (req: Request, res: Response) => {
 	try {
 		const { type, title, amount, secondPerson} = req.body;
 		const newTransaction: TransactionDocument = new TransactionSchema ({
@@ -81,4 +131,5 @@ export {
 	find,
 	modify,
   create,
+	buy,
 };

@@ -80,7 +80,7 @@ let deleteOne = async (req: Request, res: Response) => {
 		res.status(500).json({ status: 500, message: error.message });
 	}
 }
-
+/*
 let deleteAll = async (req: Request, res: Response) => {
 	try {
 		const { user} = req.body;
@@ -96,8 +96,18 @@ let deleteAll = async (req: Request, res: Response) => {
 	} catch (error) {
 		res.status(500).json({ status: 500, message: error.message });
 	}
-}
+}*/
 
+let deleteAll = async (req: Request, res: Response) => {
+	try {
+		const { user} = req.body;
+		let count;
+		count = await request.deleteAll();
+		res.status(200).send({message: count + " request was deleted successfully!"});
+	} catch (error) {
+		res.status(500).json({ status: 500, message: error.message });
+	}
+}
 // UPDATE
 let modify = async (req: Request, res: Response) => {
 	try {

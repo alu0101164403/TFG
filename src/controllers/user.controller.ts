@@ -9,7 +9,6 @@ import config from "../config/auth.config";
 import { userServices as user } from "../services";
 import { walletServices as wallet } from "../services";
 import { transactionServices as transaction } from "../services";
-import { requestServices as request } from "../services";
 import RequestSchema, { RequestDocument } from "../models/request.model";
 
 // POST

@@ -9,9 +9,9 @@ import { AddressInfo } from "net";
 import db from "./config/db.config";
 import{ 
     userRouter,
-    transactionRouter,
     requestRouter,
-    walletRouter
+    walletRouter,
+    transactionRouter,
 } from "./routes";
 
 const app = express();
@@ -49,7 +49,6 @@ app.use("/user", userRouter);
 app.use("/transaction", transactionRouter);
 app.use("/request", requestRouter);
 app.use("/wallet", walletRouter);
-
 
 
 // set port and url, listen for requests (puerto u url del backend)

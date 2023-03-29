@@ -13,5 +13,5 @@ export {
     userController,
     transactionController,
     requestController,
-    walletController
+    walletController,
 }

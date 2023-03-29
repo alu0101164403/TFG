@@ -18,7 +18,7 @@ userRouter
     .get(user.findUserById)
     .patch(user.modifyUser);
 
-    userRouter
+userRouter
   .post("/register", user.register);
 
 userRouter

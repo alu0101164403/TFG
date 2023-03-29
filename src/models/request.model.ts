@@ -2,7 +2,7 @@ import mongoose, { Schema, model } from 'mongoose';
 
 
 export interface RequestDocument extends mongoose.Document {
-	type: ("request" | "offer");
+	type: ("request" | "offer"); // request => compra, offer => venta
 	title: string;
 	description: string;
 	owner: {id: mongoose.Types.ObjectId, username: string};
