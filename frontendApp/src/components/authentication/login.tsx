@@ -11,13 +11,11 @@ import {
 import styles from '../../styles';
 import Auth from '../../services/auth-services';
 import {AuthContext} from '../../context/auth.context';
-import WalletService from '../../services/wallet.services';
 
 const Login = ({navigation}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
-  const {login, loadWallet} = useContext(AuthContext);
+  const {login} = useContext(AuthContext);
 
 
   const handleSubmitPress = () => {
@@ -28,13 +26,8 @@ const Login = ({navigation}) => {
     setPassword(''); //evita que se mantenga la contraseña en el formulario tras cerrar sesion
     Auth.login(data).then( async dataLogin => {
       login(dataLogin);
-      await WalletService.getWallet(dataLogin.wallet).then(response => {
-        loadWallet(response);
-      }).catch(_err => {
-        console.log(_err);
-      });
-      navigation.navigate('Profile');
-
+      console.log(dataLogin);
+      navigation.navigate('Home');
     }).catch(_err => {
       console.log(_err);
     });

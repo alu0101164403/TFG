@@ -26,7 +26,7 @@ const Register = ({navigation}) => {
       password: password,
     };
     Auth.register(data).then( () => {
-      navigation.navigate('Home');
+      navigation.navigate('Login');
     }).catch(_err => {
       console.log(_err);
     });

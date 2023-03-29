@@ -40,6 +40,7 @@ const App = () => {
           <Stack.Screen name="Register" component={Components.Register} />
           <Stack.Screen name="Wallet" component={Components.Wallet} />
           <Stack.Screen name="Profile" component={Components.Profile} />
+          <Stack.Screen name="ShowRequest" component={Components.ShowRequest} />
         </Stack.Navigator>
       </NavigationContainer>
     </AuthProvider>

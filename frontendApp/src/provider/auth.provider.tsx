@@ -7,7 +7,6 @@ type Props = {
 
 const AuthProvider = ({children}: Props) => {
   const [user, setUser] = useState<null | String>(null);
-  const [wallet, setWallet] = useState<null | String>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   //const [isLoading, setIsLoading] = useState(false);
 
@@ -16,19 +15,17 @@ const AuthProvider = ({children}: Props) => {
     setIsLoggedIn(true);
   };
 
+  const updateUser = (userData: String) => {
+    setUser(userData);
+  };
+
   const logout = () => {
     console.log('Logout');
     setUser(null);
-    setWallet(null);
-  };
-
-  const loadWallet = (data: String) => {
-    setWallet(data);
   };
 
   return (
-    <AuthContext.Provider
-      value={{user, wallet, isLoggedIn, login, logout, loadWallet}}>
+    <AuthContext.Provider value={{user, isLoggedIn, login, updateUser, logout}}>
       {children}
     </AuthContext.Provider>
   );

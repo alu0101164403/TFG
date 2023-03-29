@@ -9,7 +9,7 @@ import Components from '../';
 
 
 const UserPerfil = ({navigation}) => {
-  const {user, wallet, logout} = useContext(AuthContext);
+  const {user, logout} = useContext(AuthContext);
 
   const handleLogout = () => {
     logout();
@@ -29,7 +29,7 @@ const UserPerfil = ({navigation}) => {
       <View style={styles.stylesContainer.containerCoins}>
         <TouchableOpacity style={styles.stylesBtm.btmTouchableCoins} onPress={() => navigation.navigate('Wallet')}>
           <Text style={styles.stylesText.text}>Mi cartera</Text>
-          <Text style={styles.stylesText.textNumberProfile}>{wallet.coins}</Text>
+          <Text style={styles.stylesText.textNumberProfile}>{user.wallet.coins}</Text>
           <Image style={{ width: 20, height: 20 }} source={require('../../assets/logoSFtfg.png')} />
         </TouchableOpacity>
       </View>

@@ -6,6 +6,7 @@ import Profile from './user/userProfile';
 import Wallet from './user/wallet';
 import AppNavigator from './commons/navbar';
 import ModalRequest from './commons/modal';
+import ShowRequest from './commons/request';
 
 export default {
   Welcome,
@@ -16,4 +17,5 @@ export default {
   Wallet,
   AppNavigator,
   ModalRequest,
+  ShowRequest,
 };

@@ -20,13 +20,16 @@ const ModalRequest = ({visible, onClose}) => {
 
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
+  const [price, setPrice] = useState('');
 
   const handleFormSubmit = () => {
     const data = {
-      owner: user.username,
-      category: 'offer',
+      owner: {id: user.id, username: user.username},
+      type: 'offer',
       title: title,
       description: description,
+      category: 'sc',
+      price: parseInt(price, 10),
     };
     requestServices.saveRequest(data).then( () => {
       onClose();
@@ -41,7 +44,6 @@ const ModalRequest = ({visible, onClose}) => {
         visible={visible}
         animationType="slide"
         transparent={false}>
-        {/* Contenido del formulario */}
         <View style={styles.stylesContainer.container}>
           <View style={styles.stylesText.inputViewDisable}>
             <TextInput
@@ -63,6 +65,13 @@ const ModalRequest = ({visible, onClose}) => {
               placeholder="Título"
               placeholderTextColor="#97E4FD"
               onChangeText={titleInput => setTitle(titleInput)} />
+          </View>
+          <View style={styles.stylesText.inputView}>
+            <TextInput
+              style={styles.stylesText.textInput}
+              placeholder="Precio"
+              placeholderTextColor="#97E4FD"
+              onChangeText={priceInput => setPrice(priceInput)} />
           </View>
           <View style={styles.stylesText.textArea}>
             <TextInput

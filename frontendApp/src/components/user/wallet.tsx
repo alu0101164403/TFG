@@ -1,8 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Image } from '@rneui/base';
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {View, Text, ScrollView} from 'react-native';
-//import { useFocusEffect } from '@react-navigation/native';
 
 import styles from '../../styles';
 import {AuthContext} from '../../context/auth.context';
@@ -10,25 +9,26 @@ import Components from '../../components';
 import TransactionService from '../../services/transaction.services';
 
 const Wallet = ({navigation}) => {
-  const {user, wallet} = useContext(AuthContext);
+  const {user} = useContext(AuthContext);
   const [history, setHistory] = useState([]);
 
   useEffect(() => {
     async function getRequestsUser () {
-      let historyUser : [];
-      historyUser = wallet.history.map((id: String) => {
-        try {
-          const data = TransactionService.getTransaction(id);
-          return data;
-        } catch (err) {
-          return err;
-        }
-      });
-      historyUser = await Promise.all(historyUser);
-      setHistory(historyUser);
+      let historyUser;
+      try {
+        historyUser = await Promise.all(
+          user.wallet.history.map(async (id: String) => {
+            const data = await TransactionService.getTransaction(id);
+            return data;
+          })
+        );
+        setHistory(historyUser);
+      } catch (err) {
+        return err;
+      }
     }
     getRequestsUser();
-  }, [wallet.history]);
+  }, [user.wallet.history]);
 
   return (
     <><View style={styles.stylesContainer.container}>
@@ -43,7 +43,7 @@ const Wallet = ({navigation}) => {
       </View>
       <View style={styles.stylesContainer.containerCoins}>
         <Text style={styles.stylesText.text}>Mi cartera</Text>
-        <Text style={styles.stylesText.textNumberProfile}>{wallet.coins}</Text>
+        <Text style={styles.stylesText.textNumberProfile}>{user.wallet.coins}</Text>
         <Image style={{ width: 20, height: 20 }} source={require('../../assets/logoSFtfg.png')} />
       </View>
 

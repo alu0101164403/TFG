@@ -1,11 +1,11 @@
+import {AxiosResponse} from 'axios';
 import {createContext} from 'react';
 
 export const AuthContext = createContext({
   user: null,
-  wallet: null,
   isLoggedIn: false,
   isLoading: false,
-  login: (_data: String) => {},
+  login: (_data: AxiosResponse) => {},
+  updateUser: (_data: AxiosResponse) => {},
   logout: () => {},
-  loadWallet: (_data: String) => {},
 });
