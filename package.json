@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc-watch --onSuccess \"node dist/server.js\""
+    "start": "nodemon \"src/index.ts\""
   },
   "repository": {
     "type": "git",
@@ -34,7 +34,7 @@
     "eslint-plugin-import": "^2.24.1",
     "eslint-plugin-n": "^15.6.0",
     "eslint-plugin-promise": "^5.0.0",
-    "nodemon": "^2.0.20",
+    "nodemon": "^2.0.22",
     "tsc-watch": "^6.0.0",
     "tslib": "^2.5.0",
     "typescript": "^4.9.4"
@@ -46,6 +46,7 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.8.2",
+    "socket.io": "^4.6.1",
     "validator": "^13.7.0"
   }
 }

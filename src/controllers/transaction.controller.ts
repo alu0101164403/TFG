@@ -6,7 +6,6 @@ import { walletServices as wallet } from "../services";
 
 import TransactionSchema, { TransactionDocument } from "../models/transaction.model";
 import mongoose from "mongoose";
-import { WalletDocument } from "../models/wallet.model";
 
 
 const buy = async (req: Request, res: Response) => {

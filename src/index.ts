@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import * as http from "http";
 import * as mongoose from "mongoose";
+import {Server} from 'socket.io';
 
 import { AddressInfo } from "net";
 
@@ -12,6 +13,7 @@ import{
     requestRouter,
     walletRouter,
     transactionRouter,
+    chatRouter,
 } from "./routes";
 
 const app = express();
@@ -23,7 +25,6 @@ const HOST_NAME: string = process.env.URL || '127.0.0.1';
 const DB_URL = process.env.DB_URL || db.URL;
 
 app.use(function (req, res, next) {
-    console.log('Time:', Date.now());
     next();
   });
 
@@ -49,10 +50,64 @@ app.use("/user", userRouter);
 app.use("/transaction", transactionRouter);
 app.use("/request", requestRouter);
 app.use("/wallet", walletRouter);
+app.use("/message", chatRouter);
 
 
 // set port and url, listen for requests (puerto u url del backend)
 const server = http.createServer(app);
+export const io = new Server(server);
+// Generates random string as the ID
+const generateID = () => Math.random().toString(36).substring(2, 10);
+const chatLists: { id: string; chatName: string; messages: []; }[] = [];
+app.get("/chatLsit", (req, res) => {
+    res.json(chatLists);
+});
+
+// Manejar conexiones de Socket.io
+/* io.on('connection', (socket) => {
+    console.log(`⚡: ${socket.id} user just connected!`);
+
+    socket.on("createChat", (chatName) => {
+        socket.join(chatName);
+        // Adds the new group name to the chat rooms array
+        chatLists.unshift({ id: generateID(), chatName, messages: [] });
+        // Returns the updated chat rooms via another event
+        socket.emit("chatsList", chatLists);
+    });
+    socket.on("findRoom", (id) => {
+        // Filters the array by the ID
+        let result = chatLists.filter((room) => room.id == id);
+        // Sends the messages to the app
+        socket.emit("foundRoom", result[0].messages);
+    });
+    socket.on("newMessage", (data) => {
+        // Destructures the property from the object
+        const { room_id, message, user, timestamp } = data;
+    
+        // Finds the room where the message was sent
+        let result = chatLists.filter((room) => room.id == room_id);
+    
+        // Create the data structure for the message
+        const newMessage = {
+            id: generateID(),
+            text: message,
+            user,
+            time: `${timestamp.hour}:${timestamp.mins}`,
+        };
+        // Updates the chatroom messages
+        socket.to(result[0].chatName).emit("roomMessage", newMessage);
+        result[0].messages.push(newMessage);
+    
+        // Trigger the events to reflect the new changes
+        socket.emit("roomsList", chatLists);
+        socket.emit("foundRoom", result[0].messages);
+    });
+    socket.on('disconnect', () => {
+        socket.disconnect()
+        console.log('🔥: A user disconnected');
+    });
+}); */
+
 server.listen(PORT, HOST_NAME, () => {
     const { port, address } = server.address() as AddressInfo;
     console.log(`Express server is listening at http://${address}:${port}.`); 

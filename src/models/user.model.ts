@@ -14,6 +14,7 @@ export interface UserDocument extends mongoose.Document {
 	wallet: WalletDocument;
 	requests: [mongoose.Types.ObjectId];
 	score: number;
+	socketId: string;
 }
 
 // estructura que tendra el docuemento json
@@ -25,7 +26,7 @@ const UserSchema = new Schema<UserDocument>({
 		min: 4,
 		validate: {
 			validator: function (value: string) { return (validator.isAlphanumeric(value, 'es-ES')) },
-			message: "El uername debe ser alfanumerico.",
+			message: "El username debe ser alfanumerico.",
 		}
 	},
 	image: {
@@ -37,9 +38,7 @@ const UserSchema = new Schema<UserDocument>({
 		unique: true,
 		validate: {
 			validator: function (value: string) {
-				if ( value.length === 13 && value.includes('alu') && (/^\D*(\d\D*){10}$/).test(value)) {
-					return true;
-				} else return false;
+				return value.length === 13 && value.includes('alu') && (/^\D*(\d\D*){10}$/).test(value);
 			},
 			message: "La credencial no es valida.",
 		}
@@ -75,7 +74,11 @@ const UserSchema = new Schema<UserDocument>({
 		default: 0,
 		min: 0,
 		max: 5,
-	}
+	},
+	socketId: {
+		type: String,
+		require: true,
+	},
 });
 
 export default model<UserDocument>("User", UserSchema);

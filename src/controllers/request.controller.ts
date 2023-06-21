@@ -7,7 +7,6 @@ import mongoose, { ObjectId } from "mongoose";
 
 // CREATE 
 let create = async (req: Request, res: Response) => {
-	console.log('soy create request')	
 	try {
 		const { type, title, description, category, owner, price} = req.body;
 		console.log('owner', owner)
@@ -19,7 +18,6 @@ let create = async (req: Request, res: Response) => {
 			owner,
 			price,
 		});
-		console.log(newRequest)
 		const requestSave = await request.create(newRequest);
 		await user.addRequestUser(requestSave._id.toHexString(), owner.id);
 		res.status(201).send({ message: "Succesfull created request." });
@@ -30,7 +28,6 @@ let create = async (req: Request, res: Response) => {
 
 // GET 
 let getAll = async (req: Request, res: Response) => {
-	console.log('soy getAll')
 	try {
 		const requests = await request.getAll();
 		res.status(200).send(requests);
@@ -40,7 +37,6 @@ let getAll = async (req: Request, res: Response) => {
 }
 
 let find = async (req: Request, res: Response) => {
-	console.log('soy find')
 	try {
 		const { id } = req.params;
 		const requestFound = await request.find(new mongoose.Schema.Types.ObjectId(id));
@@ -51,7 +47,6 @@ let find = async (req: Request, res: Response) => {
 }
 
 let findByUser = async (req: Request, res: Response) => {
-	console.log('soy findByUser request');
 	const { id } = req.params;
 	const userFound = await user.findUser(new mongoose.Schema.Types.ObjectId(id));
 	let requestUser;
