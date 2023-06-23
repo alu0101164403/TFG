@@ -2,7 +2,7 @@
 
 import { AuthContext } from '@/context/auth.context';
 import requestServices from '@/services/request.services';
-import { useState, useContext } from 'react'
+import { useState, useContext, useCallback } from 'react'
 
 
 export default function FormComponent({ isOpen, onClose }) {
@@ -19,7 +19,8 @@ export default function FormComponent({ isOpen, onClose }) {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = useCallback((event) => {
+    event.preventDefault();
     const data = {
       owner: {id: user.id, username: user.username},
       type: 'offer',
@@ -33,71 +34,76 @@ export default function FormComponent({ isOpen, onClose }) {
     }).catch(_err => {
       console.log(_err);
     });
-  };
+  }, [onClose]);
 
   return (
-    <div className={`fixed inset-0 flex items-center justify-center ${isOpen ? '' : 'hidden'}`}>
-      <div className="bg-white rounded-lg p-6 w-80">
-        <h2 className="text-2xl font-bold mb-4">Formulario</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label htmlFor="title" className="block mb-2 text-gray-800">
-              Titulo
-            </label>
-            <input
-              type="text"
-              id="title"
-              name="title"
-              value={formData.title}
-              onChange={handleChange}
-              className="w-full border-gray-300 border p-2 rounded"
-              required
-            />
+    <>
+    {
+      isOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white rounded-lg p-6 w-80 border border-gray-300">
+            <h2 className="text-2xl font-bold mb-4">Formulario</h2>
+            <form onSubmit={handleSubmit}>
+              <div className="mb-4">
+                <label htmlFor="title" className="block mb-2 text-gray-800">
+                  Titulo
+                </label>
+                <input
+                  type="text"
+                  id="title"
+                  name="title"
+                  value={formData.title}
+                  onChange={handleChange}
+                  className="w-full border-gray-300 border p-2 rounded"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="precio" className="block mb-2 text-gray-800">
+                  Precio
+                </label>
+                <input
+                  type="text"
+                  id="precio"
+                  name="precio"
+                  value={formData.precio}
+                  onChange={handleChange}
+                  className="w-full border-gray-300 border p-2 rounded"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="description" className="block mb-2 text-gray-800">
+                  Descipcion
+                </label>
+                <textarea
+                  id="description"
+                  name="description"
+                  value={formData.description}
+                  onChange={handleChange}
+                  className="w-full border-gray-300 border p-2 rounded"
+                  required
+                />
+              </div>
+              <div className="flex justify-end">
+                <button
+                  type="submit"
+                  className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                >
+                  Enviar
+                </button>
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="ml-2 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                >
+                  Cancelar
+                </button>
+              </div>
+            </form>
           </div>
-          <div className="mb-4">
-            <label htmlFor="precio" className="block mb-2 text-gray-800">
-              Precio
-            </label>
-            <input
-              type="text"
-              id="precio"
-              name="precio"
-              value={formData.precio}
-              onChange={handleChange}
-              className="w-full border-gray-300 border p-2 rounded"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="description" className="block mb-2 text-gray-800">
-              Descipcion
-            </label>
-            <textarea
-              id="description"
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              className="w-full border-gray-300 border p-2 rounded"
-              required
-            />
-          </div>
-          <div className="flex justify-end">
-            <button
-              type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-            >
-              Enviar
-            </button>
-            <button
-              type="button"
-              onClick={onClose}
-              className="ml-2 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-            >
-              Cancelar
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+        </div>
+      )}
+    </>
   );
 }
