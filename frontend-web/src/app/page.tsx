@@ -1,32 +1,37 @@
 "use client";
 
 import { AuthContext } from "@/context/auth.context";
-import RequestService from "@/services/request.services";
+import {RequestData, RequestDataReceive, RequestService} from "@/services/request.services";
 import { useContext, useEffect, useState } from "react";
 import FormComponent from "./components/formRequests";
 import RequestDetailsModals from "./components/requestDetails";
 
 export default function Home() {
   const {isLoggedIn} = useContext(AuthContext);
-  const [allRequest, setAllRequest] = useState([]);
-  const [selectedRequest, setSelectedRequest] = useState(null);
+  const [allRequest, setAllRequest] = useState<RequestDataReceive[]>([]);
+  const [selectedRequest, setSelectedRequest] = useState<RequestDataReceive | null>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    RequestService.getAllRequest().then(data => {
-      setAllRequest(data);
-    }).catch(err => {
-      return err;
-    });
-    console.log(allRequest)
-  }, [allRequest]);
+    const fetchAllRequests = async () => {
+      try {
+        const response = await RequestService.getAllRequest();
+        const data = response.data;
+        setAllRequest(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+  
+    fetchAllRequests();
+  }, []);
 
   const openForm = () => {
     setIsFormOpen(true);
   };
 
-  const handleRequestSelection = (request) => {
+  const handleRequestSelection = (request: RequestDataReceive) => {
     setSelectedRequest(request);
     setIsModalOpen(true);
   };
@@ -57,41 +62,45 @@ export default function Home() {
             
           </div>
           <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-            {allRequest.slice(0, 10).map((request) => (
-              <article 
-                key={request._id} 
-                className="flex max-w-xl flex-col items-start border-r pl-5 pr-5 justify-between"
-                onClick={() => handleRequestSelection(request)}>
-                <div className="flex items-center gap-x-4 text-xs">
-                  <time dateTime={request.date} className="text-gray-500">
-                    {request.date.toString().substring(0 ,10)}
-                  </time>
-                  <p className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600">
-                    {request.type}
-                  </p>
-                </div>
-               <div className="group relative">
-                  <h3 className="flex items-center mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                    {request.title}
-                    <span className="ml-2 text-rose-400">{request.price}</span>
-                    <img
-                      className="hidden h-5 w-auto lg:block"
-                      src="/logoSFtfg.png"
-                      alt="Your Company"
-                    />
-                  </h3>
-                  <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">{request.description}</p>
-                </div> 
-                <div className="relative mt-8 flex items-center gap-x-4">
-                  <img src='/avatar.png' alt="" className="h-10 w-10 rounded-full bg-gray-50" />
-                  <div className="text-sm leading-6">
-                    <p className="font-semibold text-gray-900">
-                      {request.owner.username}
-                    </p>
-                  </div>
-                </div>
-              </article>
-            ))}
+            {
+              allRequest.length > 0 && (
+                allRequest.slice(0, 10).map((request) => (
+                  <article 
+                    key={request._id} 
+                    className="flex max-w-xl flex-col items-start border-r pl-5 pr-5 justify-between"
+                    onClick={() => handleRequestSelection(request)}>
+                    <div className="flex items-center gap-x-4 text-xs">
+                      <time dateTime={request.date} className="text-gray-500">
+                        {request.date.toString().substring(0 ,10)}
+                      </time>
+                      <p className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600">
+                        {request.type}
+                      </p>
+                    </div>
+                   <div className="group relative">
+                      <h3 className="flex items-center mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+                        {request.title}
+                        <span className="ml-2 text-rose-400">{request.price}</span>
+                        <img
+                          className="hidden h-5 w-auto lg:block"
+                          src="/logoSFtfg.png"
+                          alt="Your Company"
+                        />
+                      </h3>
+                      <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">{request.description}</p>
+                    </div> 
+                    <div className="relative mt-8 flex items-center gap-x-4">
+                      <img src='/avatar.png' alt="" className="h-10 w-10 rounded-full bg-gray-50" />
+                      <div className="text-sm leading-6">
+                        <p className="font-semibold text-gray-900">
+                          {request.owner.username}
+                        </p>
+                      </div>
+                    </div>
+                  </article>
+                ))
+              )
+            }
           </div>
           <RequestDetailsModals isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} request={selectedRequest} />
         </div>

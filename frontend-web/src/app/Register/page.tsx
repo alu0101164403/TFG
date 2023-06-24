@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import Auth from '../../services/auth-services';
+import {Auth, UserData} from '../../services/auth-services';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -48,16 +48,18 @@ export default function Register() {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const repeatPassword = event.target.passwordRepeat.value;
+    const formData = new FormData(event.currentTarget);
+    const repeatPassword = formData.get('passwordRepeat');
+
     if (password !== repeatPassword) {
       setPasswordError("Las contraseñas no coinciden.");
       return;
     }
     validateCredential(credential);
     if (credentialError === "" && passwordError === "") {
-      const data = {
+      const data: UserData = {
         username: username,
         email: email,
         credential: credential,

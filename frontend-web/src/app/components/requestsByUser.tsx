@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import WarningModal from "./modalWarning";
-import RequestService from "@/services/request.services";
+import {RequestDataReceive, RequestService} from "@/services/request.services";
 
-export default function RequestsByUser({ isOpen, onClose, requests, title }) {
+export default function RequestsByUser({ isOpen, onClose, requests, title }: { isOpen: boolean, onClose: () => void, requests: RequestDataReceive[], title: string }) {
   if (!isOpen || !requests) return null;
   const [isWarningOpen, setIsModalWarningOpen] = useState(false);
   let isDelete = false, isBlock = false;
@@ -88,7 +88,7 @@ export default function RequestsByUser({ isOpen, onClose, requests, title }) {
                       </h3>
                       <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">{request.description}</p>
                     </div>
-                    <WarningModal isOpen={isWarningOpen} onClose={action(request._id)} message={message} />
+                    <WarningModal isOpen={isWarningOpen} onClose={() => action(request._id)} message={message} />
                   </article>
                 ))}
               </div>
@@ -102,7 +102,7 @@ export default function RequestsByUser({ isOpen, onClose, requests, title }) {
                 Atrás
               </button>
             </div>
-        { requests.lenght == 0 && (
+        { requests.length == 0 && (
           <>
             <div className="mx-auto max-w-7xl px-6 lg:px-8 py-6 ">
               <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
