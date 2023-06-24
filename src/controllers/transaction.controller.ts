@@ -17,13 +17,14 @@ const buy = async (req: Request, res: Response) => {
 
   if (userBuyer && userSeller && requestFound) {
     // comrpobar saldo comprador
-    const {price, type, title} = requestFound;
+    const {price, type, title, owner} = requestFound;
     if (userBuyer.wallet.coins >= price && type === "offer") {
 			// realizar transferencia
 			const transactionCreated: TransactionDocument = await transaction.create(new TransactionSchema ({
 				type: "request",
 				title: title,
 				amount: price,
+				ownerRequest: owner,
 				secondPerson: userSeller.username,
 			}));
 			let buyerHistory = userBuyer.wallet.history;
@@ -81,6 +82,7 @@ let getAll = async (req: Request, res: Response) => {
 }
 
 let find = async (req: Request, res: Response) => {
+	console.log('transaction')
 	try {
 		const { id } = req.params;
 		const transactionFound = await transaction.find(new mongoose.Schema.Types.ObjectId(id));

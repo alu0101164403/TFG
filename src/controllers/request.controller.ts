@@ -67,6 +67,7 @@ let findByUser = async (req: Request, res: Response) => {
 
 // DELETE 
 let deleteOne = async (req: Request, res: Response) => {
+	console.log('deleteOne')
 	try {
 		const { id } = req.params;
 		await request.deleteOne(new mongoose.Schema.Types.ObjectId(id));

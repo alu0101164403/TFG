@@ -4,6 +4,7 @@ import mongoose, { Schema, model } from 'mongoose';
 export interface RequestDocument extends mongoose.Document {
 	type: ("request" | "offer"); // request => compra, offer => venta
 	title: string;
+	active: boolean;
 	description: string;
 	owner: {id: mongoose.Types.ObjectId, username: string};
 	category: String;
@@ -17,6 +18,10 @@ const RequestSchema = new Schema<RequestDocument>({
 		type: String,
 		require: true,
 		enum: ["request", "offer"],
+	},
+	active: {
+		type: Boolean,
+		default: true,
 	},
 	title: {
 		type: String,
@@ -37,8 +42,8 @@ const RequestSchema = new Schema<RequestDocument>({
 	price: {
 		type: Number,
 		require: true,
-		default: 0,
-		min: 0,
+		default: 1,
+		min: 1,
 	},
 	date: {
 		type: Date,

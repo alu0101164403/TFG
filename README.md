@@ -39,3 +39,4 @@ https://wanago.io/2018/12/03/typescript-express-tutorial-routing-controllers-mid
 
 
 
+Ejecutar back: ts-node src/index.ts

@@ -4,6 +4,7 @@ export interface TransactionDocument extends mongoose.Document {
 	title: string;
 	type: ("sale" | "buy" | "initial");
 	amount: number;
+	ownerRequest: string;
 	secondPerson: string;
 	date: Date;
 }
@@ -21,6 +22,10 @@ const TransactionSchema = new Schema<TransactionDocument>({
 		type: Number,
 		required: true,
 		min: 0,
+	},
+	ownerRequest: {
+		type: String,
+		require: true,
 	},
 	secondPerson: {
 		type: String,

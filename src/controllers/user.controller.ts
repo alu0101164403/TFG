@@ -47,6 +47,7 @@ let register = async (req: Request, res: Response) => {
 
 // LOGIN
 let login = async (req: Request, res: Response) => {
+	console.log('logn')
 	try {
 		const { username } =  req.body;
 		const userFound: UserDocument | null = await user.findUserByName(username);
