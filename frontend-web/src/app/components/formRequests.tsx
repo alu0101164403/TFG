@@ -1,11 +1,11 @@
-'client';
+"use client";
 
 import { AuthContext } from '@/context/auth.context';
-import requestServices from '@/services/request.services';
+import {RequestService, RequestData} from '@/services/request.services';
 import { useState, useContext, useCallback } from 'react'
 
 
-export default function FormComponent({ isOpen, onClose }) {
+export default function FormComponent({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) {
   const {user} = useContext(AuthContext);
 
   const [formData, setFormData] = useState({
@@ -14,26 +14,30 @@ export default function FormComponent({ isOpen, onClose }) {
     precio: '',
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: { target: { name: string; value: string; }; }) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleSubmit = useCallback((event) => {
+  const handleSubmit = useCallback((event: { preventDefault: () => void; }) => {
     event.preventDefault();
-    const data = {
-      owner: {id: user.id, username: user.username},
-      type: 'offer',
-      title: formData.title,
-      description: formData.description,
-      category: 'sc',
-      price: parseInt(formData.precio, 10),
-    };
-    requestServices.saveRequest(data).then( () => {
-      onClose();
-    }).catch(_err => {
-      console.log(_err);
-    });
+    if (user != null) {
+      const data: RequestData = {
+        owner: {id: user.id, username: user.username},
+        type: 'offer',
+        title: formData.title,
+        description: formData.description,
+        category: 'sc',
+        price: parseInt(formData.precio, 10),
+      };
+      RequestService.saveRequest(data).then( () => {
+        onClose();
+      }).catch(_err => {
+        console.log(_err);
+      });
+    } else {
+      console.log('No hay un usuario conectado')
+    }
   }, [onClose]);
 
   return (

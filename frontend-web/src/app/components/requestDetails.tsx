@@ -1,16 +1,17 @@
 "use client";
 
 import { AuthContext } from "@/context/auth.context";
-import TransactionService from "@/services/transaction.services";
+import { RequestDataReceive } from "@/services/request.services";
+import TransactionService, { DataTransaction } from "@/services/transaction.services";
 import { useContext } from "react";
 
 
-export default function RequestDetailsModals ({ isOpen, onClose, request }) {
+export default function RequestDetailsModals ({ isOpen, onClose, request }: { isOpen: boolean, onClose: () => void, request: RequestDataReceive | null}) {
   if (!isOpen || !request) return null;
   const {user, updateUser, isLoggedIn} = useContext(AuthContext);
 
   const acceptRequest = async () => {
-    const data = {
+    const data:DataTransaction = {
       buyer: user,
       sellerId: request.owner.id,
       requestId: request._id,
