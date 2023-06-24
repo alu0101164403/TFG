@@ -15,23 +15,20 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const {login} = useContext(AuthContext);
 
-
   const handleSubmitPress = () => {
     const data = {
       username: username,
       password: password,
     };
-    setPassword(''); //evita que se mantenga la contraseña en el formulario tras cerrar sesion
+    setPassword('');
     Auth.login(data).then( async dataLogin => {
       login(dataLogin);
-      console.log(dataLogin);
-      router.push('/Profile');
-    }).catch(_err => {
-      console.log(_err);
+      router.push('/');
+    }).catch(error => {
+       return error;
     });
   };
 
-  
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -47,7 +44,7 @@ export default function Login() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={handleSubmitPress} method="POST">
             <div>
               <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">
                 Nombre de usuario 
@@ -91,7 +88,6 @@ export default function Login() {
 
             <div>
               <button 
-                onClick={handleSubmitPress}
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-rose-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-rose-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                 Entrar

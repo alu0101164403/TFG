@@ -61,9 +61,12 @@ export default async function Wallet() {
         <tbody>
           {
             history.map(item => {
+              {console.log(item)}
               return (
                 <tr className="h-12">
-                  <td className="w-1/3 px-4 py-2">{item.title} {(item.type === 'initial' || item.type === 'offer') ? item.secondPerson : user.username}</td>
+                  <td className="w-1/3 px-4 py-2">{item.title}
+                    <span className="w-1/3 px-4 py-2 italic">por {item.secondPerson}</span>
+                  </td>
                   <td className="w-1/3 px-4 py-2">{item.date.toString().substring(0 ,10)}</td>
                   <td className="w-1/3 px-4 py-2">{(item.type === 'initial' || item.type === 'offer') ? '+' + item.amount : '-' + item.amount}</td>
                 </tr>
