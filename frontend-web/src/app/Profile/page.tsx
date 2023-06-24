@@ -4,29 +4,33 @@ import { useContext, useEffect, useState } from "react";
 import {AuthContext} from '../../context/auth.context';
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import RequestService from "@/services/request.services";
+import {RequestService, RequestDataReceive} from "@/services/request.services";
 import RequestsByUser from "../components/requestsByUser";
-import { request } from "http";
 
 export default function Profile() {
   const router = useRouter();
   const {user, logout} = useContext(AuthContext);
-  const [allRequest, setAllRequest] = useState([]);
+  const [allRequest, setAllRequest] = useState<RequestDataReceive[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   let countRequests = 0, countOfferts = 0;
 
   useEffect(() => {
-    if (!user && router.pathname !== "/Login") {
+    if (!user) {
       router.push('/Login');
     }
   }, [user, router]);
   
   useEffect(() => {
-    RequestService.getRequestsUser(user.id).then(data => {
-      setAllRequest(data);
-    }).catch(err => {
-      return err;
-    });
+    if (user) {
+      RequestService.getRequestsUser(user.id).then(data => {
+        setAllRequest(data.data);
+      }).catch(err => {
+        return err;
+      });
+    } else {
+      console.log('No hay usuarios autenticados')
+    }
+    
   }, [user]);
 
   const count = () => {

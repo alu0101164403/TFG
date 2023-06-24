@@ -1,6 +1,8 @@
+"use client";
+
 import React, { useState } from 'react';
 
-const WarningModal = ({isOpen, message, onClose}) => {
+const WarningModal = ({isOpen, message, onClose}: { isOpen: boolean, message: string, onClose: () => void }) => {
   if (!isOpen || !message) return null;
 
   return (

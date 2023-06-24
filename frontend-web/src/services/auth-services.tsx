@@ -1,7 +1,14 @@
 import {AxiosResponse} from 'axios';
 import http from '../../http-commons';
 
-const register = (data: string): Promise<AxiosResponse<any, any>> => {
+export interface UserData {
+  username: string;
+  email: string;
+  credential: string;
+  password: string;
+}
+
+const register = (data: UserData): Promise<AxiosResponse<any, any>> => {
   return http.post('/user/register', data);
 };
 
@@ -13,9 +20,7 @@ const login = async (data: {
   return dataUser.data.data;
 };
 
-const AuthService = {
+export const Auth = {
   register,
   login,
 };
-
-export default AuthService;

@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
-import Auth from '../../services/auth-services';
+import {Auth} from '../../services/auth-services';
 import {AuthContext} from '../../context/auth.context';
 import { useContext, useState } from 'react';
 
