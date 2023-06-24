@@ -7,6 +7,7 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
+import {ListItem} from "@react-native-material/core";
 
 import styles from '../../styles';
 import {AuthContext} from '../../context/auth.context';
@@ -27,12 +28,14 @@ const Home = ({navigation}) => {
 
   return (
     <><View style={styles.stylesContainer.container}>
-      <Text style={styles.stylesText.title}>Ùltimos añadidos</Text>
+      <View style={styles.stylesContainer.containerTitle}>
+        <Text style={styles.stylesText.title}>Ùltimos añadidos</Text>
+      </View>
       <ScrollView style={styles.stylesContainer.scroll}>
         { allRequest && (
           allRequest.slice(0, 5).map(request => {
-            return (
-              <View key={request._id} style={styles.stylesContainer.container}>
+          return (
+              <View key={request._id} style={styles.stylesContainer.container, {width: '100%', height: 100}}>
                 <TouchableOpacity style={styles.stylesContainer.containerHistory} onPress={() => navigation.navigate('ShowRequest', {data: request})}>
                   <Text style={styles.stylesText.textProfileRequest}>{request.title}</Text>
                   <Text style={styles.stylesText.textProfileRequest}>{request.description}</Text>
@@ -56,9 +59,7 @@ const Home = ({navigation}) => {
         </TouchableOpacity>
       </View>
     </View>
-    { isLoggedIn && (
     <Components.AppNavigator navigation={navigation} />
-    )}
     </>
   );
 };

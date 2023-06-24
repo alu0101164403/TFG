@@ -12,6 +12,7 @@ import React, { useContext } from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {Image, LogBox, View} from 'react-native';
+import {io} from 'socket.io-client';
 
 import AuthProvider from './src/provider/auth.provider';
 import Components from './src/components';
@@ -23,6 +24,8 @@ import styles from './src/styles';
 LogBox.ignoreAllLogs();   // Ignore all log notifications
 
 const Stack = createNativeStackNavigator();
+
+const socketIo = io('http://10.0.2.2:8080');
 
 const App = () => {
   const {isLoggedIn} = useContext(AuthContext);
@@ -41,6 +44,12 @@ const App = () => {
           <Stack.Screen name="Wallet" component={Components.Wallet} />
           <Stack.Screen name="Profile" component={Components.Profile} />
           <Stack.Screen name="ShowRequest" component={Components.ShowRequest} />
+          <Stack.Screen name="ChatRoom">
+            {(props) => <Components.ChatRoom {...props} socketIo={socketIo} />}
+          </Stack.Screen>
+          <Stack.Screen name="Chat">
+            {(props) => <Components.Chat {...props} socketIo={socketIo} />}
+          </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
     </AuthProvider>
@@ -51,7 +60,7 @@ const App = () => {
 // ----------------------- customizar barra de navegación superior --------------------- //
 const screenOptions = {
   headerStyle: {
-    backgroundColor: '#97E4FD',
+    backgroundColor: '#f0f8ff',
   },
  //headerTitle: () => <CustomHeaderTitle />,
   headerTintColor: '#000000',

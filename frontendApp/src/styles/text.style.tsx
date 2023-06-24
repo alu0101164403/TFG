@@ -6,6 +6,13 @@ const stylesText = StyleSheet.create({
     fontSize: 26,
     marginBottom: 100,
     color: '#6F6464',
+    textAlign: 'center',
+  },
+  line: {
+    borderBottomWidth: 1,
+    borderBottomColor: 'gray',
+    marginVertical: 8,
+    width: '100%',
   },
   titleBtm: {
     fontWeight: 'bold',

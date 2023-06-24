@@ -7,6 +7,20 @@ const styleContainers = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  containerInfo: {
+    backgroundColor: '#ffff',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    padding: 16,
+  },
+  containerTitle: {
+    flex: 1,
+    backgroundColor: '#ffff',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 50,
+    with: 150,
+  },
   containerLoading: {
     flex: 1,
     backgroundColor: '#000000',
@@ -35,7 +49,7 @@ const styleContainers = StyleSheet.create({
   },
   containerRequest: {
     flex: 0.2,
-    backgroundColor: '#D9D9D9',
+    backgroundColor: '#f0ffff',
     marginBottom: 5,
     justifyContent: 'flex-start',
     flexDirection: 'row',
@@ -45,12 +59,15 @@ const styleContainers = StyleSheet.create({
   },
   containerHistory: {
     flex: 1,
-    backgroundColor: '#D9D9D9',
+    backgroundColor: '#f0ffff',
+    borderColor: '#000000',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
     marginBottom: 5,
     padding: 5,
+    borderRadius: 20,
+    height: 80,
   },
   containerButtons: {
     flexDirection: 'row',
