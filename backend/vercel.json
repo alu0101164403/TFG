@@ -1,8 +1,6 @@
 {
   "version": 2,
-  "name": "tfg-beckend",
-  "alias": ["tfg-beckend"],
-  "builds": [{ "src": "index.ts", "use": "@vercel/node" }],
+  "builds": [{ "src": "./dist/index.js", "use": "@vercel/node" }],
   "routes": [{
     "headers": {
         "Access-Control-Allow-Origin": "*",
