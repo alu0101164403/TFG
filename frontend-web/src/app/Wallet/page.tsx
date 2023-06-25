@@ -70,7 +70,6 @@ export default async function Wallet() {
           <tbody>
             { Array.isArray(history) &&
               history.map((item: any) => {
-                {console.log(item)}
                 return (
                   <tr className="h-12">
                     <td className="w-1/3 px-4 py-2">{item.title}

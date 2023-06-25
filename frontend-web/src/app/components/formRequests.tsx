@@ -7,16 +7,16 @@ import { useState, useContext, useCallback } from 'react'
 
 export default function FormComponent({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) {
   const {user} = useContext(AuthContext);
-
   const [formData, setFormData] = useState({
     title: '',
     description: '',
     precio: '',
   });
 
-  const handleChange = (e: { target: { name: string; value: string; }; }) => {
+  const handleChange = async (e: { target: { name: string; value: string; }; }) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
+    console.log('f',formData)
   };
 
   const handleSubmit = useCallback((event: { preventDefault: () => void; }) => {
@@ -38,7 +38,7 @@ export default function FormComponent({ isOpen, onClose }: { isOpen: boolean, on
     } else {
       console.log('No hay un usuario conectado')
     }
-  }, [onClose]);
+  }, [formData]);
 
   return (
     <>

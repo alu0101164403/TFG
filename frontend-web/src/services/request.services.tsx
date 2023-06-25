@@ -21,8 +21,8 @@ export interface RequestDataReceive {
   date: string;
 }
 
-const saveRequest = (data: RequestData): Promise<AxiosResponse<any, any>> => {
-  return http.post('/request/', {data});
+const saveRequest = async (data: RequestData): Promise<AxiosResponse<any, any>> => {
+  return await http.post('/request/', data);
 };
 
 const getRequestsUser = async (idUser: string): Promise<AxiosResponse<RequestDataReceive[]>> => {
