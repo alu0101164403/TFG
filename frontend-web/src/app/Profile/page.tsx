@@ -21,6 +21,7 @@ export default function Profile() {
   }, [user, router]);
   
   useEffect(() => {
+    console.log('s',user)
     if (user) {
       RequestService.getRequestsUser(user.id).then(data => {
         setAllRequest(data.data);

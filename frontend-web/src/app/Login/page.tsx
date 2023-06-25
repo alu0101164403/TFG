@@ -22,6 +22,7 @@ export default function Login() {
     };
     setPassword('');
     Auth.login(data).then( async dataLogin => {
+      console.log(dataLogin)
       login(dataLogin);
       router.push('/');
     }).catch(error => {

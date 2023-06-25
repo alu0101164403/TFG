@@ -17,7 +17,7 @@ const login = async (data: {
   password: string;
 }): Promise<AxiosResponse<string, string>> => {
   const dataUser = await http.post('/user/login', data);
-  return dataUser.data.data;
+  return dataUser.data;
 };
 
 export const Auth = {
