@@ -55,10 +55,13 @@ let login = async (req: Request, res: Response) => {
 		if (userFound === null) {
 			res.status(400).json({ error: 'User not found.' });
 		} else {
-			bcrypt.compare(req.body.password, userFound.password, async function(err) {
+			bcrypt.compare(req.body.password, userFound.password, async function(err, result) {
 				if (err) {
-					res.status(403).json({ message: err });
-				} else {
+					res.status(500).json({ message: err });
+				} else if (result === false) {
+					res.status(403).json({ message: 'Contraseña incorrecta.' });
+				} else 
+				{
 					const token = jwt.sign({
 						name: userFound.username,
 						id: userFound._id,

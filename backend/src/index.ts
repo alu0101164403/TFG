@@ -29,7 +29,9 @@ app.use(function (req, res, next) {
   });
 
 // cors es una politica para permitir el acceso a los recursos
-app.use(cors());
+app.use(cors({
+    origin: "*",
+}));
 
 // parse requests of content-type - application/json
 // bodyparse permite el acceso al contenido del body 

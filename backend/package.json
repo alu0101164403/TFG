@@ -47,6 +47,7 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.8.2",
     "socket.io": "^4.6.1",
-    "validator": "^13.7.0"
+    "validator": "^13.7.0",
+    "vercel": "^30.2.3"
   }
 }
