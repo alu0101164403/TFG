@@ -49,5 +49,8 @@
     "socket.io": "^4.6.1",
     "validator": "^13.7.0",
     "vercel": "^30.2.3"
+  },
+  "engines": {
+    "node": "16.17.0"
   }
 }
