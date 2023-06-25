@@ -1,27 +1,28 @@
 import React, {useState} from 'react';
-import {AuthContext} from '../context/auth.context';
+import {AuthContext, User} from '../context/auth.context';
+import {AxiosResponse} from 'axios';
 
 type Props = {
   children?: React.ReactNode;
 };
 
 const AuthProvider = ({children}: Props) => {
-  const [user, setUser] = useState<null | String>(null);
+  const [user, setUser] = useState<null | User>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  //const [isLoading, setIsLoading] = useState(false);
 
-  const login = (userData: String) => {
-    setUser(userData);
+  const login = (userData: AxiosResponse) => {
+    setUser(userData.data);
     setIsLoggedIn(true);
   };
 
-  const updateUser = (userData: String) => {
-    setUser(userData);
+  const updateUser = (userData: AxiosResponse) => {
+    setUser(userData.data);
+    setIsLoggedIn(true);
   };
 
   const logout = () => {
-    console.log('Logout');
     setUser(null);
+    setIsLoggedIn(false);
   };
 
   return (

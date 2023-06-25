@@ -9,9 +9,10 @@ import {
 } from 'react-native';
 
 import styles from '../../styles';
-import Auth from '../../services/auth-services';
+import {Auth} from '../../services/auth-services';
+import { NavigationProp, ParamListBase } from '@react-navigation/native';
 
-const Register = ({navigation}) => {
+const Register = ({navigation}: { navigation: NavigationProp<ParamListBase> }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [credential, setCredntial] = useState('');

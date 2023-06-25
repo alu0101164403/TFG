@@ -1,16 +1,24 @@
 import React, {useContext} from 'react';
 import {Text} from 'react-native-elements';
 import {Image, TouchableOpacity, View} from 'react-native';
-import {Divider} from '@react-native-material/core';
 import styles from '../../styles';
 
 import {AuthContext} from '../../context/auth.context';
 import Components from '../';
 import TransactionService from '../../services/transaction.services';
+import {NavigationProp, ParamListBase} from '@react-navigation/native';
+import {RequestDataReceive} from '../../services/request.services';
 
-const ShowRequest = ({route, navigation}) => {
+const ShowRequest = ({
+  route,
+  navigation,
+}: {
+  route: RequestDataReceive;
+  navigation: NavigationProp<ParamListBase>;
+}) => {
   const dataRequest = route.params.data;
-  const {user, updateUser} = useContext(AuthContext);
+  console.log('t', dataRequest);
+  const {user, updateUser, isLoggedIn} = useContext(AuthContext);
 
   const acceptRequest = async () => {
     const data = {
@@ -19,8 +27,8 @@ const ShowRequest = ({route, navigation}) => {
       requestId: dataRequest._id,
     };
     const userUpdated = await TransactionService.buy(data);
-    updateUser(userUpdated.data);
-    navigation.navigate('Profile');
+    updateUser(userUpdated);
+    navigation.navigate('Home');
   };
 
   return (
@@ -35,7 +43,8 @@ const ShowRequest = ({route, navigation}) => {
           <View style={styles.stylesText.line} />
           <Text style={styles.stylesText.text}>{dataRequest.description}</Text>
           <View style={styles.stylesText.line} />
-          <Text style={styles.stylesText.text}>Coste {dataRequest.price}
+          <Text style={styles.stylesText.text}>
+            Coste {dataRequest.price}
             <Image
               style={{width: 20, height: 20}}
               source={require('../../assets/logoSFtfg.png')}
@@ -43,23 +52,26 @@ const ShowRequest = ({route, navigation}) => {
           </Text>
           <View style={styles.stylesText.line} />
           <Text style={styles.stylesText.text}>
-            Publicado el   {dataRequest.date.slice(0, 10)}
+            Publicado el {dataRequest.date.slice(0, 10)}
           </Text>
         </View>
-        <View style={styles.stylesContainer.containerButtons}>
-          <TouchableOpacity
-            style={styles.stylesBtm.btmConBorde}
-            onPress={acceptRequest}>
-            <Text>Aceptar</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.stylesBtm.btmConBorde}
-            onPress={() =>
-              navigation.navigate('Chat', {data: dataRequest.owner})
-            }>
-            <Text>Enviar mensaje</Text>
-          </TouchableOpacity>
-        </View>
+        {isLoggedIn && (
+          <View style={styles.stylesContainer.containerButtons}>
+            <TouchableOpacity
+              style={styles.stylesBtm.btmConBorde}
+              onPress={acceptRequest}>
+              <Text>Aceptar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.stylesBtm.btmConBorde}
+              /*  onPress={() =>
+                navigation.navigate('Chat', {data: dataRequest.owner})
+              } */
+            >
+              <Text>Enviar mensaje</Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
       <Components.AppNavigator navigation={navigation} />
     </>

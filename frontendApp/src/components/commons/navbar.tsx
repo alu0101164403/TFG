@@ -5,15 +5,20 @@ import {Image, TouchableOpacity, View} from 'react-native';
 import {AuthContext} from '../../context/auth.context';
 import styles from '../../styles';
 import ModalRequest from './modal';
+import {NavigationProp, ParamListBase} from '@react-navigation/native';
 
-function AppNavigator({navigation}) {
+function AppNavigator({
+  navigation,
+}: {
+  navigation: NavigationProp<ParamListBase>;
+}) {
   const {isLoggedIn} = useContext(AuthContext);
   const [modalVisible, setModalVisible] = useState(false);
 
   const closeModal = () => {
-    setModalVisible(!modalVisible);
+    setModalVisible(false);
   };
-  console.log('log', isLoggedIn);
+
   return (
     <>
       {isLoggedIn && (
@@ -49,7 +54,8 @@ function AppNavigator({navigation}) {
           {/* CHAT */}
           <TouchableOpacity
             style={styles.stylesBtm.btmNAV}
-            onPress={() => navigation.navigate('ChatRoom')}>
+            /* onPress={() => navigation.navigate('ChatRoom')} */
+          >
             <Image
               style={styles.stylesImage.icon}
               source={require('../../assets/icons/chaticon.png')}

@@ -1,15 +1,9 @@
-import React, {
-  PropsWithChildren,
-  useEffect,
-  useLayoutEffect,
-  useState,
-} from 'react';
-import {View, Text, Pressable, SafeAreaView, FlatList} from 'react-native';
-import {Feather} from 'react-native-feather';
+/* import React, {PropsWithChildren, useState} from 'react';
+import {View, Text, SafeAreaView, FlatList} from 'react-native';
 
 import {styles} from '../../styles/chat';
 import {Socket} from 'socket.io-client';
-import messageServices from '../../services/message.services';
+//import messageServices from '../../services/message.services';
 import Chat from './Chat';
 
 interface ChatProps extends PropsWithChildren {
@@ -18,7 +12,6 @@ interface ChatProps extends PropsWithChildren {
 
 const ChatRoom = ({socketIo}: ChatProps) => {
   const [chatList, setChatList] = useState([]);
-  /*
   // Runs when the component mounts
   useLayoutEffect(() => {
     async function searchChatList() {
@@ -33,7 +26,7 @@ const ChatRoom = ({socketIo}: ChatProps) => {
     socketIo.on('chatList', chatsList => {
       setChatList(chatsList);
     });
-  }, [socketIo]);*/
+  }, [socketIo]);
 
   return (
     <SafeAreaView style={styles.chatscreen}>
@@ -55,3 +48,4 @@ const ChatRoom = ({socketIo}: ChatProps) => {
 };
 
 export default ChatRoom;
+ */

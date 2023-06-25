@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 import {View, Text} from 'react-native';
 
 function Message({message}) {
@@ -11,4 +11,4 @@ function Message({message}) {
   );
 }
 
-export default Message;
+export default Message; */

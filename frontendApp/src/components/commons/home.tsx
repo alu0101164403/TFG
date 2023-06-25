@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -7,23 +7,27 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import {ListItem} from "@react-native-material/core";
 
 import styles from '../../styles';
-import {AuthContext} from '../../context/auth.context';
 import Components from '../';
-import RequestService from '../../services/request.services';
+import {RequestDataReceive, RequestService} from '../../services/request.services';
+import { NavigationProp, ParamListBase } from '@react-navigation/native';
 
-const Home = ({navigation}) => {
-  const {isLoggedIn} = useContext(AuthContext);
-  const [allRequest, setAllRequest] = useState();
+const Home = ({navigation}: { navigation: NavigationProp<ParamListBase> }) => {
+  const [allRequest, setAllRequest] = useState<RequestDataReceive[]>([]);
 
   useEffect(() => {
-    RequestService.getAllRequest().then(data => {
-      setAllRequest(data);
-    }).catch(err => {
-      return err;
-    });
+    const fetchAllRequests = async () => {
+      try {
+        const response = await RequestService.getAllRequest();
+        const data = response.data;
+        setAllRequest(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchAllRequests();
   }, [allRequest]);
 
   return (
@@ -35,7 +39,7 @@ const Home = ({navigation}) => {
         { allRequest && (
           allRequest.slice(0, 5).map(request => {
           return (
-              <View key={request._id} style={styles.stylesContainer.container, {width: '100%', height: 100}}>
+              <View key={request._id} style={[styles.stylesContainer.container, {width: '100%', height: 100}]}>
                 <TouchableOpacity style={styles.stylesContainer.containerHistory} onPress={() => navigation.navigate('ShowRequest', {data: request})}>
                   <Text style={styles.stylesText.textProfileRequest}>{request.title}</Text>
                   <Text style={styles.stylesText.textProfileRequest}>{request.description}</Text>

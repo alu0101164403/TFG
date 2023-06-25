@@ -1,16 +1,22 @@
 import {AxiosResponse} from 'axios';
 import {createContext} from 'react';
 
-interface User {
+interface Wallet {
+  coins: number;
+  history: string[];
+}
+
+export interface User {
+  username: string;
   id: string;
-  isLoggedIn: boolean;
-  isLoading: boolean;
+  email: string;
+  wallet: Wallet;
 }
 
 interface AuthContextValue {
   user: User | null;
-  isLoggedIn: false;
-  isLoading: false;
+  isLoggedIn: boolean;
+  //isLoading: boolean;
   login: (_data: AxiosResponse) => void;
   updateUser: (_data: AxiosResponse) => void;
   logout: () => void;
@@ -19,7 +25,7 @@ interface AuthContextValue {
 export const AuthContext = createContext<AuthContextValue>({
   user: null,
   isLoggedIn: false,
-  isLoading: false,
+  //isLoading: false,
   login: (_data: AxiosResponse) => {},
   updateUser: (_data: AxiosResponse) => {},
   logout: () => {},

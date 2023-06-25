@@ -9,10 +9,11 @@ import {
 } from 'react-native';
 
 import styles from '../../styles';
-import Auth from '../../services/auth-services';
+import {Auth} from '../../services/auth-services';
 import {AuthContext} from '../../context/auth.context';
+import { NavigationProp, ParamListBase } from '@react-navigation/native';
 
-const Login = ({navigation}) => {
+const Login = ({navigation}: { navigation: NavigationProp<ParamListBase> }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const {login} = useContext(AuthContext);
@@ -26,7 +27,6 @@ const Login = ({navigation}) => {
     setPassword(''); //evita que se mantenga la contraseña en el formulario tras cerrar sesion
     Auth.login(data).then( async dataLogin => {
       login(dataLogin);
-      console.log(dataLogin);
       navigation.navigate('Home');
     }).catch(_err => {
       console.log(_err);

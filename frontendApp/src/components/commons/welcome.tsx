@@ -3,8 +3,9 @@ import {View, Text} from 'react-native';
 import {Button} from '@rneui/themed';
 
 import styles from '../../styles';
+import {NavigationProp, ParamListBase} from '@react-navigation/native';
 
-const Welcome = ({navigation}) => {
+const Welcome = ({navigation}: {navigation: NavigationProp<ParamListBase>}) => {
   return (
     <View style={styles.stylesContainer.container}>
       <Text style={styles.stylesText.title}> Welcome</Text>

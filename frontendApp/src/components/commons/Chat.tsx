@@ -1,4 +1,4 @@
-import {Socket} from 'socket.io-client';
+/* import {Socket} from 'socket.io-client';
 import React, {
   useState,
   useEffect,
@@ -127,3 +127,4 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
+ */
