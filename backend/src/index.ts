@@ -21,7 +21,7 @@ const app = express();
 
 // cors es una politica para permitir el acceso a los recursos
 const corsOptions ={
-    origin:'http://localhost:3000', 
+    origin:'http://127.0.0.1:3000', 
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200
 }
