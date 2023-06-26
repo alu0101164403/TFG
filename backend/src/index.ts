@@ -23,6 +23,12 @@ app.use(cors({
     origin:"*"
 }));
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*"); 
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 // SEREVER ENV-VAR
 const PORT: number = process.env.PORT ? parseInt(process.env.PORT) : 8080;
 const HOST_NAME: string = process.env.URL || '127.0.0.1';
