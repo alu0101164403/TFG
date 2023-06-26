@@ -31,7 +31,7 @@ app.use(function (req, res, next) {
 
 // cors es una politica para permitir el acceso a los recursos
 app.use(cors({
-    origin: "*",
+    origin: "http://localhost:3000/",
 }));
 
 // parse requests of content-type - application/json
