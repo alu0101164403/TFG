@@ -9,14 +9,14 @@ export interface UserData {
 }
 
 const register = (data: UserData): Promise<AxiosResponse<any, any>> => {
-  return http.post('/user/register', data);
+  return http.post('/api/user/register', data);
 };
 
 const login = async (data: {
   username: string;
   password: string;
 }): Promise<AxiosResponse<string, string>> => {
-  const dataUser = await http.post('/user/login', data);
+  const dataUser = await http.post('/api/user/login', data);
   return dataUser.data;
 };
 

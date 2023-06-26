@@ -9,12 +9,12 @@ export interface DataTransaction {
 }
 
 const getTransaction = async (idTransaction: String): Promise<AxiosResponse<any, any>> => {
-  const walletData = await http.get('/transaction/id/' + idTransaction);
+  const walletData = await http.get('/api/transaction/id/' + idTransaction);
   return walletData.data;
 };
 
 const buy = async (data: DataTransaction): Promise<AxiosResponse<any, any>> => {
-  return await http.post('/transaction/transfer', data);
+  return await http.post('/api/transaction/transfer', data);
 };
 
 const TransactionService = {
