@@ -19,15 +19,9 @@ require('dotenv').config();
 
 const app = express();
 
-// cors es una politica para permitir el acceso a los recursos
-const corsOptions ={
-    origin:'http://127.0.0.1:3000', 
-    credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200
-}
-app.use(cors(
-    corsOptions
-));
+app.use(cors({
+    origin:"*"
+}));
 
 // SEREVER ENV-VAR
 const PORT: number = process.env.PORT ? parseInt(process.env.PORT) : 8080;
