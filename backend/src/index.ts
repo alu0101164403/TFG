@@ -15,6 +15,7 @@ import{
     transactionRouter,
     chatRouter,
 } from "./routes";
+require('dotenv').config();
 
 const app = express();
 
@@ -48,11 +49,11 @@ app.get("/", (_, res) => {
 });
 
 // api rest
-app.use("/user", userRouter);
-app.use("/transaction", transactionRouter);
-app.use("/request", requestRouter);
-app.use("/wallet", walletRouter);
-app.use("/message", chatRouter);
+app.use("/api/user", userRouter);
+app.use("/api/transaction", transactionRouter);
+app.use("/api/request", requestRouter);
+app.use("/api/wallet", walletRouter);
+app.use("/api/message", chatRouter);
 
 
 // set port and url, listen for requests (puerto u url del backend)
