@@ -9,11 +9,11 @@ interface Data {
 }
 
 const sendMessage = (data: Data): Promise<AxiosResponse<any, any>> => {
-  return http.post('/message', data);
+  return http.post('/api/message', data);
 };
 
 const chatList = (): Promise<AxiosResponse<any, any>> => {
-  return http.get('/message');
+  return http.get('/api/message');
 };
 
 const getAll = (): Promise<AxiosResponse<any, any>> => {
@@ -24,7 +24,7 @@ const getMessages = (
   emiterId: string,
   receiverId: string,
 ): Promise<AxiosResponse<any, any>> => {
-  return http.get('/message/' + emiterId + '/' + receiverId);
+  return http.get('/api/message/' + emiterId + '/' + receiverId);
 };
 
 export default {

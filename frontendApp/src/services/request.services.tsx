@@ -24,31 +24,31 @@ export interface RequestDataReceive {
 }
 
 const saveRequest = async (data: RequestData): Promise<AxiosResponse<any, any>> => {
-  return await http.post('/request/', data);
+  return await http.post('/api/request/', data);
 };
 
 const getRequestsUser = async (idUser: string): Promise<AxiosResponse<RequestDataReceive[]>> => {
-  const datareq = await http.get('/request/owner/' + idUser);
+  const datareq = await http.get('/api/request/owner/' + idUser);
   return datareq;
 };
 
 const getRequest = async (idRequest: string): Promise<AxiosResponse<RequestDataReceive>> => {
-  const datareq = await http.get('/request/id/' + idRequest);
+  const datareq = await http.get('/api/request/id/' + idRequest);
   return datareq.data;
 };
 
 const getAllRequest = async (): Promise<AxiosResponse<RequestDataReceive[]>> => {
-  const datareq = await http.get('/request/');
+  const datareq = await http.get('/api/request/');
   return datareq;
 };
 
 const editRequestById = async (idRequest:string): Promise<AxiosResponse<any, any>> => {
-  const datareq = await http.patch('/request/id/' + idRequest);
+  const datareq = await http.patch('/api/request/id/' + idRequest);
   return datareq;
 };
 
 const deleteRequestById = async (idRequest:string): Promise<AxiosResponse<any, any>> => {
-  return http.delete('/request/id/' + idRequest);
+  return http.delete('/api/request/id/' + idRequest);
 };
 
 export const RequestService = {

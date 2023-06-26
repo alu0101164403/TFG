@@ -18,12 +18,12 @@ export interface DataHistory {
 }
 
 const getTransaction = async (idTransaction: String): Promise<AxiosResponse<any, any>> => {
-  const walletData = await http.get('/transaction/id/' + idTransaction);
+  const walletData = await http.get('/api/transaction/id/' + idTransaction);
   return walletData;
 };
 
 const buy = async (data: DataTransaction): Promise<AxiosResponse<DataHistory>> => {
-  return await http.post('/transaction/transfer', data);
+  return await http.post('/api/transaction/transfer', data);
 };
 
 const TransactionService = {
