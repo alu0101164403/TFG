@@ -44,6 +44,7 @@ const App = () => {
           <Stack.Screen name="Wallet" component={Components.Wallet} />
           <Stack.Screen name="Profile" component={Components.Profile} />
           <Stack.Screen name="ShowRequest" component={Components.ShowRequest} />
+          <Stack.Screen name="Shop" component={Components.Shop} />
           <Stack.Screen name="ChatRoom">
             {(props) => <Components.ChatRoom {...props} socketIo={socketIo} />}
           </Stack.Screen>

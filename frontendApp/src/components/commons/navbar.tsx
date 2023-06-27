@@ -42,6 +42,15 @@ function AppNavigator({
             />
             <ModalRequest visible={modalVisible} onClose={closeModal} />
           </TouchableOpacity>
+          {/* SHOP */}
+          <TouchableOpacity
+            style={styles.stylesBtm.btmNAV}
+            onPress={() => navigation.navigate('Shop')}>
+            <Image
+              style={styles.stylesImage.icon}
+              source={require('../../assets/logoSFtfg.png')}
+            />
+          </TouchableOpacity>
           {/* PROFILE */}
           <TouchableOpacity
             style={styles.stylesBtm.btmNAV}
@@ -81,6 +90,15 @@ function AppNavigator({
             <Image
               style={styles.stylesImage.icon}
               source={require('../../assets/register.png')}
+            />
+          </TouchableOpacity>
+          {/* SHOP */}
+          <TouchableOpacity
+            style={styles.stylesBtm.btmNAV}
+            onPress={() => navigation.navigate('Shop')}>
+            <Image
+              style={styles.stylesImage.icon}
+              source={require('../../assets/logoSFtfg.png')}
             />
           </TouchableOpacity>
         </View>

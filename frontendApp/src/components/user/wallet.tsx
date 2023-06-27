@@ -42,11 +42,19 @@ const Wallet = ({navigation}: { navigation: NavigationProp<ParamListBase> }) => 
         <>
         <View style={styles.stylesContainer.container}>
           <View style={styles.stylesContainer.containerProfileTop}>
-            <Image style={styles.stylesImage.profileImageUser} source={require('../../assets/logoSFtfg.png')} />
+            <Image style={styles.stylesImage.profileImageUser} source={require('../../assets/userPerfil.png')} />
             <View style={styles.stylesContainer.containerDataUser}>
               <Text style={styles.stylesText.textDataUser}>{user.username}</Text>
               <Text style={styles.stylesText.textDataUser}>{user.email}</Text>
-              <Text>Number starts</Text>
+              <View style={{ flexDirection: 'row' }}>
+                {Array.from({ length: 5 }).map((_, index) => (
+                  <Image
+                    key={index}
+                    style={{ width: 20, height: 20 }}
+                    source={require('../../assets/icons/icons8-estrella-50.png')}
+                  />
+                ))}
+              </View>
             </View>
           </View>
           <View style={styles.stylesContainer.containerCoins}>

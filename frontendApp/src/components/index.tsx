@@ -7,8 +7,9 @@ import Wallet from './user/wallet';
 import AppNavigator from './commons/navbar';
 import ModalRequest from './commons/modal';
 import ShowRequest from './commons/request';
-import Chat from './commons/Chat';
-import ChatRoom from './commons/ChatRoom';
+import Shop from './commons/Shop';
+//import Chat from './commons/Chat';
+//import ChatRoom from './commons/ChatRoom';
 
 export default {
   Welcome,
@@ -20,6 +21,7 @@ export default {
   AppNavigator,
   ModalRequest,
   ShowRequest,
-  Chat,
-  ChatRoom,
+  Shop,
+  //Chat,
+  //ChatRoom,
 };

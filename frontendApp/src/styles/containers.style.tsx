@@ -1,6 +1,21 @@
 import {StyleSheet} from 'react-native';
 
 const styleContainers = StyleSheet.create({
+  containerHistory2: {
+    width: '100%',
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: 'lightgray',
+  },
+  requestIcons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  requestDetails: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   container: {
     flex: 1,
     backgroundColor: '#ffff',

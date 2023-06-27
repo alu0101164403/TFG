@@ -33,7 +33,7 @@ const Home = ({navigation}: { navigation: NavigationProp<ParamListBase> }) => {
   return (
     <><View style={styles.stylesContainer.container}>
       <View style={styles.stylesContainer.containerTitle}>
-        <Text style={styles.stylesText.title}>Ùltimos añadidos</Text>
+        <Text style={styles.stylesText.title}>Ùltimos añadidos. Mira lo que han publcado tus compañeros.</Text>
       </View>
       <ScrollView style={styles.stylesContainer.scroll}>
         { allRequest && (
