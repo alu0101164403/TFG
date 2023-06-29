@@ -1,6 +1,16 @@
 import {StyleSheet} from 'react-native';
 
 const stylesBtm = StyleSheet.create({
+  btmSinBorde: {
+    borderWidth: 0,
+    borderRadius: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: 'lightgray',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: 5,
+  },
   containerBtm: {
     textAlign: 'center',
     alignItems: 'center',
@@ -33,7 +43,7 @@ const stylesBtm = StyleSheet.create({
     marginBottom: 25,
     backgroundColor: '#E47272',
   },
-  btmSinBorde: {
+  /* btmSinBorde: {
     width: '50%',
     borderRadius: 30,
     height: 60,
@@ -42,7 +52,7 @@ const stylesBtm = StyleSheet.create({
     marginBottom: 15,
     borderWidth: 1,
     borderColor: '#E47272',
-  },
+  }, */
   btmTouchableCoins: {
     flexDirection: 'row',
   },
@@ -59,6 +69,22 @@ const stylesBtm = StyleSheet.create({
   btmNAV: {
     marginRight: 20,
     marginLeft: 20,
+  },
+  textDataUser: {
+    fontSize: 16,
+    marginBottom: 5,
+  },
+  text: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  textProfileRequest: {
+    fontSize: 16,
+    flex: 1,
+  },
+  textNumberProfile: {
+    fontSize: 16,
+    marginLeft: 10,
   },
 });
 

@@ -1,25 +1,25 @@
 import {StyleSheet} from 'react-native';
 
 const styleContainers = StyleSheet.create({
-  containerHistory2: {
-    width: '100%',
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: 'lightgray',
-  },
-  requestIcons: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  requestDetails: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
   container: {
     flex: 1,
     backgroundColor: '#ffff',
     justifyContent: 'center',
+    alignItems: 'center',
+  },
+  containerHistory2: {
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 10,
+  },
+  requestIcons: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    marginBottom: 10,
+  },
+  requestDetails: {
+    flexDirection: 'row',
     alignItems: 'center',
   },
   containerInfo: {
@@ -28,13 +28,28 @@ const styleContainers = StyleSheet.create({
     alignItems: 'flex-start',
     padding: 16,
   },
-  containerTitle: {
+  requestInfoContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 5,
+  },
+  containerButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    paddingHorizontal: 20,
+    marginBottom: 20,
+  },
+  /* containerTitle: {
     flex: 1,
     backgroundColor: '#ffff',
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 50,
     with: 150,
+  }, */
+  containerTitle: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
   },
   containerLoading: {
     flex: 1,
@@ -43,36 +58,31 @@ const styleContainers = StyleSheet.create({
     justifyContent: 'center',
   },
   containerProfileTop: {
-    backgroundColor: '#ffff',
-    justifyContent: 'center',
-    alignItems: 'center',
     flexDirection: 'row',
-    marginTop: 50,
-  },
-  containerCoins: {
-    backgroundColor: '#ffff',
-    justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'row',
-    marginTop: 10,
     marginBottom: 20,
   },
   containerDataUser: {
-    flex: 1,
-    backgroundColor: '#ffff',
-    alignItems: 'flex-start',
+    marginLeft: 10,
+  },
+  containerCoins: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    marginBottom: 10,
   },
   containerRequest: {
-    flex: 0.2,
-    backgroundColor: '#f0ffff',
-    marginBottom: 5,
-    justifyContent: 'flex-start',
     flexDirection: 'row',
-    padding: 10,
+    justifyContent: 'space-between',
     alignItems: 'center',
-    margin: 1,
+    marginBottom: 10,
   },
-  containerHistory: {
+  buttonContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  /*   containerHistory: {
     flex: 1,
     backgroundColor: '#f0ffff',
     borderColor: '#000000',
@@ -83,16 +93,18 @@ const styleContainers = StyleSheet.create({
     padding: 5,
     borderRadius: 20,
     height: 80,
-  },
-  containerButtons: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    padding: 30,
+  }, */
+  containerHistory: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 10,
+    elevation: 3,
   },
   scroll: {
     flex: 1,
-    paddingVertical: 50,
-    width: '100%',
+    paddingHorizontal: 20,
+    marginBottom: 10,
   },
   checkboxContainer: {
     flexDirection: 'row',
@@ -107,5 +119,5 @@ const styleContainers = StyleSheet.create({
     flexDirection: 'row',
   },
 });
-//5F9EA0
+
 export default styleContainers;

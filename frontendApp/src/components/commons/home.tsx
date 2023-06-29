@@ -31,39 +31,45 @@ const Home = ({navigation}: { navigation: NavigationProp<ParamListBase> }) => {
   }, [allRequest]);
 
   return (
-    <><View style={styles.stylesContainer.container}>
-      <View style={styles.stylesContainer.containerTitle}>
-        <Text style={styles.stylesText.title}>Ùltimos añadidos. Mira lo que han publcado tus compañeros.</Text>
-      </View>
-      <ScrollView style={styles.stylesContainer.scroll}>
-        { allRequest && (
-          allRequest.slice(0, 5).map(request => {
-          return (
-              <View key={request._id} style={[styles.stylesContainer.container, {width: '100%', height: 100}]}>
-                <TouchableOpacity style={styles.stylesContainer.containerHistory} onPress={() => navigation.navigate('ShowRequest', {data: request})}>
-                  <Text style={styles.stylesText.textProfileRequest}>{request.title}</Text>
-                  <Text style={styles.stylesText.textProfileRequest}>{request.description}</Text>
+    <>
+      <View style={styles.stylesContainer.container}>
+        <View style={styles.stylesContainer.containerTitle}>
+          <Text style={styles.stylesText.title}>Últimos añadidos. Mira lo que han publicado tus compañeros.</Text>
+        </View>
+        <ScrollView style={styles.stylesContainer.scroll}>
+          {allRequest && allRequest.slice(0, 5).map(request => (
+            <View key={request._id} style={styles.stylesContainer.container}>
+              <TouchableOpacity
+                style={styles.stylesContainer.containerHistory}
+                onPress={() => navigation.navigate('ShowRequest', { data: request })}
+              >
+                <View style={styles.stylesContainer.requestInfoContainer}>
+                  <Text style={[styles.stylesText.textProfileRequest, {color: 'black', fontSize: 18}]}>{request.title}</Text>
+                  <Text style={styles.stylesText.textDate}>{request.date.toString().substring(0, 10)}</Text>
+                </View>
+                <Text numberOfLines={20} style={styles.stylesText.textProfileRequest}>
+                  {request.description}
+                </Text>
+                <View style={styles.stylesContainer.requestInfoContainer}>
                   <Text style={styles.stylesText.textNumberProfile}>{request.owner.username}</Text>
-                  <Text style={styles.stylesText.textNumberProfile}>{request.price}</Text><Image style={{width: 20, height: 20}} source={require('../../assets/logoSFtfg.png')} />
-                </TouchableOpacity>
-              </View>
-            );
-          })
-        )}
-        { !allRequest && (
-          <Text>No hay request para mostrar</Text>
-        )}
-      </ScrollView>
-      <View style={styles.stylesContainer.containerButtons}>
-        <TouchableOpacity style={styles.stylesBtm.btmSinBorde}>
-          <Text>Ver Ventas</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.stylesBtm.btmSinBorde}>
-          <Text>Ver Solicitudes</Text>
-        </TouchableOpacity>
+                  <Text style={styles.stylesText.textNumberProfile}>{request.price}</Text>
+                  <Image style={{ width: 20, height: 20 }} source={require('../../assets/logoSFtfg.png')} />
+                </View>
+              </TouchableOpacity>
+            </View>
+          ))}
+          {!allRequest && <Text>No hay request para mostrar</Text>}
+        </ScrollView>
+        <View style={styles.stylesContainer.containerButtons}>
+          <TouchableOpacity style={styles.stylesBtm.btmSinBorde}>
+            <Text>Ver Ventas</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.stylesBtm.btmSinBorde}>
+            <Text>Ver Solicitudes</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
-    <Components.AppNavigator navigation={navigation} />
+      <Components.AppNavigator navigation={navigation} />
     </>
   );
 };

@@ -91,20 +91,24 @@ const UserPerfil = ({navigation}: { navigation: NavigationProp<ParamListBase> })
       </View>
       <View style={styles.stylesContainer.container}>
         <View style={styles.stylesContainer.containerRequest}>
-          <Text style={styles.stylesText.textProfileRequest}>Respuestas solicitudes</Text>
-          <Text style={styles.stylesText.textNumberProfile}>0</Text>
-          <Text style={styles.stylesText.textProfileRequest}>Respuestas peticiones</Text>
-          <Text style={styles.stylesText.textNumberProfile}>0</Text>
+          <TouchableOpacity style={styles.stylesContainer.buttonContainer}>
+            <Text style={styles.stylesText.textProfileOptons}>Respuestas solicitudes</Text>
+            <Text style={styles.stylesText.textNumberProfileOptions}>0</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.stylesContainer.buttonContainer}>
+            <Text style={styles.stylesText.textProfileOptons}>Respuestas peticiones</Text>
+            <Text style={styles.stylesText.textNumberProfileOptions}>0</Text>
+          </TouchableOpacity>
         </View>
         <View style={styles.stylesContainer.containerRequest}>
-          <TouchableOpacity onPress={() => setIsActive(true)}>
-            <Text style={styles.stylesText.textProfileRequest}>Solicitudes activas</Text>
+          <TouchableOpacity onPress={() => setIsActive(true)} style={styles.stylesContainer.buttonContainer}>
+            <Text style={styles.stylesText.textProfileOptons}>Solicitudes activas</Text>
+            <Text style={styles.stylesText.textNumberProfileOptions}>{countOfferts}</Text>
           </TouchableOpacity>
-          <Text style={styles.stylesText.textNumberProfile}>{countOfferts}</Text>
-          <TouchableOpacity onPress={() => setIsActive(true)}>
-            <Text style={styles.stylesText.textProfileRequest}>Peticiones activas</Text>
+          <TouchableOpacity onPress={() => setIsActive(true)} style={styles.stylesContainer.buttonContainer}>
+            <Text style={styles.stylesText.textProfileOptons}>Peticiones activas</Text>
+            <Text style={styles.stylesText.textNumberProfileOptions}>{countRequests}</Text>
           </TouchableOpacity>
-          <Text style={styles.stylesText.textNumberProfile}>{countRequests}</Text>
         </View>
         {
           isActive && (

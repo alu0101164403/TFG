@@ -2,11 +2,27 @@ import {StyleSheet} from 'react-native';
 
 const stylesText = StyleSheet.create({
   // welcome file
-  title: {
+  /* title: {
     fontSize: 26,
     marginBottom: 100,
     color: '#6F6464',
     textAlign: 'center',
+  }, */
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  textProfileRequest: {
+    fontSize: 16,
+  },
+  textProfileOptons: {
+    fontSize: 16,
+    color: 'black',
+    marginRight: 10,
+  },
+  textNumberProfileOptions: {
+    fontSize: 16,
+    marginRight: 15,
   },
   line: {
     borderBottomWidth: 1,
@@ -25,20 +41,14 @@ const stylesText = StyleSheet.create({
     flex: 1,
     padding: 10,
     marginLeft: 20,
-  },
-  textProfileRequest: {
-    flex: 0.5,
-    fontSize: 16,
     color: 'black',
-    fontWeight: 'bold',
-    marginHorizontal: 15,
-    textAlign: 'left',
   },
   textNumberProfile: {
-    fontSize: 16,
-    marginHorizontal: 15,
-    color: 'grey',
-    fontWeight: 'bold',
+    fontSize: 14,
+  },
+  textDate: {
+    fontSize: 12,
+    color: 'gray',
   },
   textDataUser: {
     fontSize: 20,
@@ -60,6 +70,17 @@ const stylesText = StyleSheet.create({
     height: 50,
     marginBottom: 20,
     alignItems: 'flex-start',
+  },
+  textRequestTitle: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: 'black',
+    marginHorizontal: 15,
+  },
+  textRequestDescription: {
+    fontSize: 12,
+    color: 'black',
+    marginHorizontal: 15,
   },
   inputViewDisable: {
     borderRadius: 30,

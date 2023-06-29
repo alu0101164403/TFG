@@ -38,7 +38,7 @@ const Login = ({navigation}: { navigation: NavigationProp<ParamListBase> }) => {
       <Image style={styles.stylesImage.logo} source={require('../../assets/logoSFtfg.png')} />
       <View style={styles.stylesText.inputView}>
         <TextInput
-          style={styles.stylesText.textInput}
+          style={[styles.stylesText.textInput, { color: 'black' }]}
           placeholder="Username"
           placeholderTextColor="#97E4FD"
           onChangeText={emailInput => setUsername(emailInput)}
@@ -46,7 +46,7 @@ const Login = ({navigation}: { navigation: NavigationProp<ParamListBase> }) => {
       </View>
       <View style={styles.stylesText.inputView}>
         <TextInput
-          style={styles.stylesText.textInput}
+          style={[styles.stylesText.textInput, { color: 'black' }]}
           placeholder="Password."
           placeholderTextColor="#97E4FD"
           secureTextEntry={true}

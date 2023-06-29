@@ -11,14 +11,14 @@ const stylesImages = StyleSheet.create({
     height: 150,
     marginBottom: 80,
   },
-  profileImageUser: {
-    marginHorizontal: 30,
-    width: 80,
-    height: 80,
-  },
   icon: {
     width: 35,
     height: 35,
+  },
+  profileImageUser: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
   },
 });
 

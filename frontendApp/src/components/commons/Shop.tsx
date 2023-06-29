@@ -1,74 +1,79 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet} from 'react-native';
+import Components from '../';
+import {NavigationProp, ParamListBase} from '@react-navigation/native';
 
-const Shop = () => {
+const Shop = ({navigation}: {navigation: NavigationProp<ParamListBase>}) => {
   return (
-    <View style={styles.container}>
-      <View style={styles.row}>
-        <View style={styles.item}>
-          <Image
-            style={styles.image}
-            source={require('../../assets/logoSFtfg.png')}
-          />
-          <Text style={styles.title}>Crédito 2/2</Text>
-          <Text style={styles.description}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          </Text>
-          <Text style={styles.price}>200</Text>
-          <Image
-            style={styles.logo}
-            source={require('../../assets/logoSFtfg.png')}
-          />
+    <>
+      <View style={styles.container}>
+        <View style={styles.row}>
+          <View style={styles.item}>
+            <Image
+              style={styles.image}
+              source={require('../../assets/logoSFtfg.png')}
+            />
+            <Text style={styles.title}>Crédito 2/2</Text>
+            <Text style={styles.description}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </Text>
+            <Text style={styles.price}>200</Text>
+            <Image
+              style={styles.logo}
+              source={require('../../assets/logoSFtfg.png')}
+            />
+          </View>
+          <View style={styles.item}>
+            <Image
+              style={styles.image}
+              source={require('../../assets/boleto.png')}
+            />
+            <Text style={styles.title}>Ticket para evento 1/1</Text>
+            <Text style={styles.description}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </Text>
+            <Text style={styles.price}>50</Text>
+            <Image
+              style={styles.logo}
+              source={require('../../assets/logoSFtfg.png')}
+            />
+          </View>
         </View>
-        <View style={styles.item}>
-          <Image
-            style={styles.image}
-            source={require('../../assets/boleto.png')}
-          />
-          <Text style={styles.title}>Ticket para evento 1/1</Text>
-          <Text style={styles.description}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          </Text>
-          <Text style={styles.price}>50</Text>
-          <Image
-            style={styles.logo}
-            source={require('../../assets/logoSFtfg.png')}
-          />
+        <View style={styles.row}>
+          <View style={styles.item}>
+            <Image
+              style={styles.image}
+              source={require('../../assets/logoSFtfg.png')}
+            />
+            <Text style={styles.title}>Producto 3</Text>
+            <Text style={styles.description}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </Text>
+            <Text style={styles.price}>35</Text>
+            <Image
+              style={styles.logo}
+              source={require('../../assets/logoSFtfg.png')}
+            />
+          </View>
+          <View style={styles.item}>
+            <Image
+              style={styles.image}
+              source={require('../../assets/logoSFtfg.png')}
+            />
+            <Text style={styles.title}>Producto 4</Text>
+            <Text style={styles.description}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </Text>
+            <Text style={styles.price}>40</Text>
+            <Image
+              style={styles.logo}
+              source={require('../../assets/logoSFtfg.png')}
+            />
+          </View>
         </View>
       </View>
-      <View style={styles.row}>
-        <View style={styles.item}>
-          <Image
-            style={styles.image}
-            source={require('../../assets/logoSFtfg.png')}
-          />
-          <Text style={styles.title}>Producto 3</Text>
-          <Text style={styles.description}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          </Text>
-          <Text style={styles.price}>35</Text>
-          <Image
-            style={styles.logo}
-            source={require('../../assets/logoSFtfg.png')}
-          />
-        </View>
-        <View style={styles.item}>
-          <Image
-            style={styles.image}
-            source={require('../../assets/logoSFtfg.png')}
-          />
-          <Text style={styles.title}>Producto 4</Text>
-          <Text style={styles.description}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          </Text>
-          <Text style={styles.price}>40</Text>
-          <Image
-            style={styles.logo}
-            source={require('../../assets/logoSFtfg.png')}
-          />
-        </View>
-      </View>
-    </View>
+      <Components.AppNavigator navigation={navigation} />
+    </>
   );
 };
 
