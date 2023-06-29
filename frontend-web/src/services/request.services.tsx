@@ -37,6 +37,7 @@ const getRequest = async (idRequest: string): Promise<AxiosResponse<RequestDataR
 
 const getAllRequest = async (): Promise<AxiosResponse<RequestDataReceive[]>> => {
   const datareq = await http.get('/api/request/');
+  console.log(datareq)
   return datareq;
 };
 
