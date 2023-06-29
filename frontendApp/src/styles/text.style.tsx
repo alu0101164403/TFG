@@ -11,9 +11,11 @@ const stylesText = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: 'bold',
+    color: 'grey',
   },
   textProfileRequest: {
     fontSize: 16,
+    color: 'black',
   },
   textProfileOptons: {
     fontSize: 16,
@@ -23,6 +25,7 @@ const stylesText = StyleSheet.create({
   textNumberProfileOptions: {
     fontSize: 16,
     marginRight: 15,
+    color: 'black',
   },
   line: {
     borderBottomWidth: 1,
@@ -45,6 +48,7 @@ const stylesText = StyleSheet.create({
   },
   textNumberProfile: {
     fontSize: 14,
+    color: 'black',
   },
   textDate: {
     fontSize: 12,

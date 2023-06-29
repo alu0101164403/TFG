@@ -8,7 +8,9 @@ import {NavigationProp, ParamListBase} from '@react-navigation/native';
 const Welcome = ({navigation}: {navigation: NavigationProp<ParamListBase>}) => {
   return (
     <View style={styles.stylesContainer.container}>
-      <Text style={styles.stylesText.title}> Welcome</Text>
+      <Text style={[styles.stylesText.title, {marginBottom: 60, fontSize: 28}]}>
+        Welcome
+      </Text>
       <Button
         title="LOG IN"
         buttonStyle={styles.stylesBtm.btmWelcome}

@@ -95,11 +95,11 @@ const ModalRequest = ({visible, onClose}: {visible: boolean, onClose: () => void
             <View style={styles.stylesContainer.containerButtons}>
               <TouchableOpacity style={styles.stylesBtm.btmModalRequest}
                 onPress={() => { onClose(); } }>
-                <Text>Cerrar</Text>
+                <Text style={{color: 'black'}}>Cerrar</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.stylesBtm.btmModalRequest}
                 onPress={() => { handleFormSubmit(); } }>
-                <Text>Añadir</Text>
+                <Text style={{color: 'black'}}>Añadir</Text>
               </TouchableOpacity>
             </View>
           </View>

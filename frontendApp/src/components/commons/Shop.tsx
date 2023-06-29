@@ -101,14 +101,17 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: 'bold',
     marginTop: 5,
+    color: 'black',
   },
   description: {
     fontSize: 12,
     marginTop: 5,
+    color: 'gray',
   },
   price: {
     fontWeight: 'bold',
     marginTop: 5,
+    color: 'gray',
   },
   logo: {
     width: 20,

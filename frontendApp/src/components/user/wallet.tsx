@@ -68,8 +68,8 @@ const Wallet = ({navigation}: { navigation: NavigationProp<ParamListBase> }) => 
                   return (
                     <TouchableOpacity key={item.title} style={styles.stylesContainer.containerHistory}>
                       <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Text style={[styles.stylesText.textProfileRequest, {color: 'black'}]}>{item.title}</Text>
-                        <Text style={[styles.stylesText.textNumberProfile, {color: 'black'}]}>
+                        <Text style={styles.stylesText.textProfileRequest}>{item.title}</Text>
+                        <Text style={styles.stylesText.textNumberProfile}>
                           {(item.type === 'initial' || item.type === 'offer') ? '+' + item.amount : '-' + item.amount}
                         </Text>
                       </View>
