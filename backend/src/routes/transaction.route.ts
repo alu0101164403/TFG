@@ -9,7 +9,8 @@ transactionRouter
 
 transactionRouter
   .route("/id/:id")
-    .get(transaction.find);
+    .get(transaction.find)
+    .post(transaction.addCoins);
 
 transactionRouter
   .route("/transfer")

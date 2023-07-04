@@ -42,7 +42,6 @@ let getUsers = async () => {
 }
 
 let findUser = async (id: ObjectId) => {
-  console.log('soy findUser services')
 	try {
     return await UserSchema.findById({ _id: id.path });
   } catch (error) {

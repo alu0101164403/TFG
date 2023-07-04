@@ -70,8 +70,8 @@ let deleteAll = async (req: Request, res: Response) => {
 let modify = async (req: Request, res: Response) => {
 	try {
 		const { id } = req.params;
-		await wallet.modify(req.body, id);
-		res.status(200).send({message: "Wallet was update successfully!"});
+		const walletUpdated = await wallet.modify(req.body, id);
+		res.status(200).send(walletUpdated);
 	} catch (error) {
 		res.status(500).json({ status: 500, message: error.message });
 	}

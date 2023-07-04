@@ -9,7 +9,6 @@ import mongoose, { ObjectId } from "mongoose";
 let create = async (req: Request, res: Response) => {
 	try {
 		const { type, title, description, category, owner, price} = req.body;
-		console.log('owner', owner)
 		const newRequest: RequestDocument = new RequestSchema ({
       type,
 			title,
@@ -57,7 +56,6 @@ let findByUser = async (req: Request, res: Response) => {
 					return await request.find(new mongoose.Schema.Types.ObjectId(idRequest.toHexString()));
 				})
 			);
-			console.log('u', requestUser);
 			res.status(200).send(requestUser);
 		} catch (error) {
 			res.status(500).json({ status: 500, message: error.message });
@@ -67,7 +65,6 @@ let findByUser = async (req: Request, res: Response) => {
 
 // DELETE 
 let deleteOne = async (req: Request, res: Response) => {
-	console.log('deleteOne')
 	try {
 		const { id } = req.params;
 		await request.deleteOne(new mongoose.Schema.Types.ObjectId(id));
@@ -82,10 +79,8 @@ let deleteAll = async (req: Request, res: Response) => {
 		const { user} = req.body;
 		let count;
 		if(user) {
-			console.log('delete- owner', user)
 			count = await request.deleteAll(new mongoose.Schema.Types.ObjectId(user));
 		} else {
-			console.log('todas')
 			count = await request.deleteAll();
 		}
 		res.status(200).send({message: count + " request was deleted successfully!"});

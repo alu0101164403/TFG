@@ -40,10 +40,8 @@ let deleteOne = async (id: ObjectId) => {
 let deleteAll = async (id?: ObjectId) => {
 	try {
     if(id) {
-      console.log('deleteServic- owner', id)
       return (await RequestSchema.deleteMany({ owner: id})).deletedCount;
     } else {
-      console.log('todas')
       return (await RequestSchema.deleteMany()).deletedCount;
     }
   } catch (error) {

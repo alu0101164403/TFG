@@ -18,7 +18,6 @@ const saveMessage = async (req: Request, res: Response) => {
     io.to(receiver).emit('receiveMessage', messageSaved);
     res.status(201).send(messageSaved); 
   } catch (error) {
-    console.log(error);
     res.status(500).json({message: 'Error al enviar mensaje'});
   }
 };
