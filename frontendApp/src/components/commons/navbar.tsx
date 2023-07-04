@@ -48,7 +48,7 @@ function AppNavigator({
             onPress={() => navigation.navigate('Shop')}>
             <Image
               style={styles.stylesImage.icon}
-              source={require('../../assets/logoSFtfg.png')}
+              source={require('../../assets/shop.png')}
             />
           </TouchableOpacity>
           {/* PROFILE */}
@@ -98,7 +98,7 @@ function AppNavigator({
             onPress={() => navigation.navigate('Shop')}>
             <Image
               style={styles.stylesImage.icon}
-              source={require('../../assets/logoSFtfg.png')}
+              source={require('../../assets/shop.png')}
             />
           </TouchableOpacity>
         </View>

@@ -17,7 +17,6 @@ const ShowRequest = ({
   navigation: NavigationProp<ParamListBase>;
 }) => {
   const dataRequest = route.params.data;
-  console.log('t', dataRequest);
   const {user, updateUser, isLoggedIn} = useContext(AuthContext);
 
   const acceptRequest = async () => {

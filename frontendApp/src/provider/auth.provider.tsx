@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {AuthContext, User} from '../context/auth.context';
+import {AuthContext, User, Wallet} from '../context/auth.context';
 import {AxiosResponse} from 'axios';
 
 type Props = {
@@ -20,13 +20,26 @@ const AuthProvider = ({children}: Props) => {
     setIsLoggedIn(true);
   };
 
+  const updateWallet = (newWallet: AxiosResponse) => {
+    const wallet: Wallet = {
+      _id: newWallet.data._id,
+      coins: newWallet.data.coins,
+      history: newWallet.data.history,
+    };
+    setUser(prevUser => ({
+      ...prevUser!,
+      wallet: wallet,
+    }));
+  };
+
   const logout = () => {
     setUser(null);
     setIsLoggedIn(false);
   };
 
   return (
-    <AuthContext.Provider value={{user, isLoggedIn, login, updateUser, logout}}>
+    <AuthContext.Provider
+      value={{user, isLoggedIn, login, updateUser, updateWallet, logout}}>
       {children}
     </AuthContext.Provider>
   );

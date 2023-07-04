@@ -8,6 +8,7 @@ import AppNavigator from './commons/navbar';
 import ModalRequest from './commons/modal';
 import ShowRequest from './commons/request';
 import Shop from './commons/Shop';
+import Payment from './commons/PaymentGateway';
 //import Chat from './commons/Chat';
 //import ChatRoom from './commons/ChatRoom';
 
@@ -24,4 +25,5 @@ export default {
   Shop,
   //Chat,
   //ChatRoom,
+  Payment,
 };

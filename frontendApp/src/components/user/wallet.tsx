@@ -64,9 +64,9 @@ const Wallet = ({navigation}: { navigation: NavigationProp<ParamListBase> }) => 
             </View>
             <View style={{flex: 1, width: '100%'}}>
               <ScrollView>
-                {history.map(item => {
+                {history.reverse().map(item => {
                   return (
-                    <TouchableOpacity key={item.title} style={styles.stylesContainer.containerHistory}>
+                    <TouchableOpacity key={item._id} style={styles.stylesContainer.containerHistory}>
                       <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                         <Text style={styles.stylesText.textProfileRequest}>{item.title}</Text>
                         <Text style={styles.stylesText.textNumberProfile}>

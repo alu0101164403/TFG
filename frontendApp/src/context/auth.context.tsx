@@ -1,7 +1,8 @@
 import {AxiosResponse} from 'axios';
 import {createContext} from 'react';
 
-interface Wallet {
+export interface Wallet {
+  _id: string;
   coins: number;
   history: string[];
 }
@@ -19,6 +20,7 @@ interface AuthContextValue {
   //isLoading: boolean;
   login: (_data: AxiosResponse) => void;
   updateUser: (_data: AxiosResponse) => void;
+  updateWallet: (newWallet: AxiosResponse) => void;
   logout: () => void;
 }
 
@@ -28,5 +30,6 @@ export const AuthContext = createContext<AuthContextValue>({
   //isLoading: false,
   login: (_data: AxiosResponse) => {},
   updateUser: (_data: AxiosResponse) => {},
+  updateWallet: (_newWallet: AxiosResponse) => {},
   logout: () => {},
 });
