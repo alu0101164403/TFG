@@ -7,10 +7,10 @@ import {
   TextInput,
   TouchableOpacity,
   Modal,
+  StyleSheet,
 } from 'react-native';
 //import {CheckBox} from 'react-native-elements';
 
-import styles from '../../styles';
 import {RequestService} from '../../services/request.services';
 import { AuthContext } from '../../context/auth.context';
 
@@ -42,7 +42,6 @@ const ModalRequest = ({visible, onClose}: {visible: boolean, onClose: () => void
     }
   };
 
-
   return (
     <>
     {
@@ -52,52 +51,52 @@ const ModalRequest = ({visible, onClose}: {visible: boolean, onClose: () => void
           visible={visible}
           animationType="slide"
           transparent={false}>
-          <View style={styles.stylesContainer.container}>
-            <View style={styles.stylesText.inputViewDisable}>
+          <View style={styles.container}>
+            <View style={styles.inputViewDisable}>
               <TextInput
-                style={styles.stylesText.textInput}
+                style={styles.textInput}
                 editable={false}
                 placeholder={"Usuario: " + user.username}
                 placeholderTextColor="#AAAAAA" />
             </View>
-            <View style={styles.stylesText.inputViewDisable}>
+            <View style={styles.inputViewDisable}>
               <TextInput
-                style={styles.stylesText.textInput}
+                style={styles.textInput}
                 editable={false}
                 placeholder={"Email: " + user.email}
                 placeholderTextColor="#AAAAAA" />
             </View>
-            <View style={styles.stylesText.inputView}>
+            <View style={styles.inputView}>
               <TextInput
-                style={styles.stylesText.textInput}
+                style={styles.textInput}
                 placeholder="Título"
-                placeholderTextColor="#97E4FD"
+                placeholderTextColor="#20B2AA"
                 onChangeText={titleInput => setTitle(titleInput)} />
             </View>
-            <View style={styles.stylesText.inputView}>
+            <View style={styles.inputView}>
               <TextInput
-                style={styles.stylesText.textInput}
+                style={styles.textInput}
                 placeholder="Precio"
-                placeholderTextColor="#97E4FD"
+                placeholderTextColor="#20B2AA"
                 onChangeText={priceInput => setPrice(priceInput)} />
             </View>
-            <View style={styles.stylesText.textArea}>
+            <View style={styles.textArea}>
               <TextInput
-                style={styles.stylesText.textInput}
+                style={styles.textInput}
                 editable
                 multiline={true}
                 numberOfLines={100}
                 placeholder="Descripción"
-                placeholderTextColor="#97E4FD"
+                placeholderTextColor="#20B2AA"
                 onChangeText={descriptionInput => setDescription(descriptionInput)} />
             </View>
             {/* Botones salida formulario */}
-            <View style={styles.stylesContainer.containerButtons}>
-              <TouchableOpacity style={styles.stylesBtm.btmModalRequest}
+            <View style={styles.containerButtons}>
+              <TouchableOpacity style={styles.btmModalRequest}
                 onPress={() => { onClose(); } }>
                 <Text style={{color: 'black'}}>Cerrar</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.stylesBtm.btmModalRequest}
+              <TouchableOpacity style={styles.btmModalRequest}
                 onPress={() => { handleFormSubmit(); } }>
                 <Text style={{color: 'black'}}>Añadir</Text>
               </TouchableOpacity>
@@ -110,5 +109,70 @@ const ModalRequest = ({visible, onClose}: {visible: boolean, onClose: () => void
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
+  textArea: {
+    width: '90%',
+    height: 120,
+    borderWidth: 1,
+    borderColor: '#20B2AA',
+    borderRadius: 30,
+    paddingHorizontal: 10,
+    paddingTop: 10,
+    textAlignVertical: 'top',
+  },
+  textInput: {
+    height: 50,
+    flex: 1,
+    padding: 10,
+    marginLeft: 20,
+    color: 'black',
+  },
+  inputView: {
+    borderRadius: 30,
+    borderWidth: 1,
+    borderColor: '#20B2AA',
+    width: '90%',
+    height: 50,
+    marginBottom: 20,
+    alignItems: 'flex-start',
+  },
+  inputViewDisable: {
+    borderRadius: 30,
+    borderWidth: 1,
+    borderColor: '#AAAAAA',
+    width: '90%',
+    height: 50,
+    marginBottom: 20,
+    alignItems: 'flex-start',
+  },
+  containerButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    paddingHorizontal: 20,
+    marginHorizontal: 20,
+    marginVertical: 20,
+  },
+  btmModalRequest: {
+    width: '40%',
+    borderRadius: 25,
+    height: 45,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 15,
+    backgroundColor: '#20B2AA',
+    marginHorizontal: 10,
+  },
+});
 
 export default ModalRequest;

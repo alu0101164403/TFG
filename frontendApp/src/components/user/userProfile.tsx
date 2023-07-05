@@ -1,9 +1,8 @@
 /* eslint-disable prettier/prettier */
 import {Image} from '@rneui/base';
 import React, { useContext, useEffect, useState } from 'react';
-import {View, Text, TouchableOpacity, ScrollView} from 'react-native';
+import {View, Text, TouchableOpacity, ScrollView, StyleSheet, Dimensions} from 'react-native';
 
-import styles from '../../styles';
 import {AuthContext} from '../../context/auth.context';
 import Components from '../';
 import { RequestDataReceive, RequestService } from '../../services/request.services';
@@ -57,12 +56,12 @@ const UserPerfil = ({navigation}: { navigation: NavigationProp<ParamListBase> })
   }
 
   return (
-    <><View style={styles.stylesContainer.container}>
-      <View style={styles.stylesContainer.containerProfileTop}>
-        <Image style={styles.stylesImage.profileImageUser} source={require('../../assets/userPerfil.png')} />
-        <View style={styles.stylesContainer.containerDataUser}>
-          <Text style={styles.stylesText.textDataUser}>{user.username}</Text>
-          <Text style={styles.stylesText.textDataUser}>{user.email}</Text>
+    <><View style={styles.container}>
+      <View style={styles.containerProfileTop}>
+        <Image style={styles.profileImageUser} source={require('../../assets/user1.jpg')} />
+        <View style={styles.containerDataUser}>
+          <Text style={styles.textDataUser}>{user.username}</Text>
+          <Text style={styles.textDataUser}>{user.email}</Text>
           <View style={{ flexDirection: 'row' }}>
             {Array.from({ length: 5 }).map((_, index) => (
               <Image
@@ -72,79 +71,185 @@ const UserPerfil = ({navigation}: { navigation: NavigationProp<ParamListBase> })
               />
             ))}
           </View>
+          <TouchableOpacity style={styles.btmTouchableCoins} onPress={() => navigation.navigate('Wallet')}>
+            <Text style={styles.text}>Mi cartera   </Text>
+            <Text style={styles.textNumberProfile}>{user.wallet.coins}</Text>
+            <Image style={{ width: 20, height: 20 }} source={require('../../assets/monedaSinFondo.png')} />
+          </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.stylesContainer.containerCoins}>
-        <TouchableOpacity style={styles.stylesBtm.btmTouchableCoins} onPress={() => navigation.navigate('Wallet')}>
-          <Text style={styles.stylesText.text}>Mi cartera</Text>
-          <Text style={styles.stylesText.textNumberProfile}>{user.wallet.coins}</Text>
-          <Image style={{ width: 20, height: 20 }} source={require('../../assets/logoSFtfg.png')} />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.stylesContainer.containerProfileTop}>
-        <TouchableOpacity style={{marginHorizontal: 20}}>
-          <Text style={styles.stylesText.text}>Opciones</Text>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={{marginRight: 20}}>
+          <Text style={styles.text}>Opciones</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => handleLogout()}>
-          <Text style={styles.stylesText.text}>Cerrar Sesión</Text>
+          <Text style={styles.text}>Cerrar Sesión</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.stylesContainer.container}>
-        <View style={styles.stylesContainer.containerRequest}>
-          <TouchableOpacity style={styles.stylesContainer.buttonContainer}>
-            <Text style={styles.stylesText.textProfileOptons}>Respuestas solicitudes</Text>
-            <Text style={styles.stylesText.textNumberProfileOptions}>0</Text>
+      <View style={styles.separator} />
+      <View style={styles.container}>
+        <View style={styles.containerRequest}>
+          <TouchableOpacity style={styles.buttonContainer}>
+            <Text style={styles.textProfileOptons}>Respuestas solicitudes</Text>
+            <Text style={styles.textNumberProfileOptions}>0</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.stylesContainer.buttonContainer}>
-            <Text style={styles.stylesText.textProfileOptons}>Respuestas peticiones</Text>
-            <Text style={styles.stylesText.textNumberProfileOptions}>0</Text>
+          <TouchableOpacity style={styles.buttonContainer}>
+            <Text style={styles.textProfileOptons}>Respuestas peticiones</Text>
+            <Text style={styles.textNumberProfileOptions}>0</Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.stylesContainer.containerRequest}>
-          <TouchableOpacity onPress={() => setIsActive(true)} style={styles.stylesContainer.buttonContainer}>
-            <Text style={styles.stylesText.textProfileOptons}>Solicitudes activas</Text>
-            <Text style={styles.stylesText.textNumberProfileOptions}>{countOfferts}</Text>
+        <View style={styles.containerRequest}>
+          <TouchableOpacity onPress={() => setIsActive(true)} style={styles.buttonContainer}>
+            <Text style={styles.textProfileOptons}>Solicitudes activas</Text>
+            <Text style={styles.textNumberProfileOptions}>{countOfferts}</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => setIsActive(true)} style={styles.stylesContainer.buttonContainer}>
-            <Text style={styles.stylesText.textProfileOptons}>Peticiones activas</Text>
-            <Text style={styles.stylesText.textNumberProfileOptions}>{countRequests}</Text>
+          <TouchableOpacity onPress={() => setIsActive(true)} style={styles.buttonContainer}>
+            <Text style={styles.textProfileOptons}>Peticiones activas</Text>
+            <Text style={styles.textNumberProfileOptions}>{countRequests}</Text>
           </TouchableOpacity>
         </View>
         {
           isActive && (
-            <ScrollView style={styles.stylesContainer.scroll}>
+            <><View style={styles.separator} />
+            <ScrollView style={styles.scroll}>
               {allRequest && (
                 allRequest.slice(0, 5).map(request => {
                   return (
-                    <View key={request._id} style={[styles.stylesContainer.container, { width: '100%', height: '100%' }]}>
-                      <TouchableOpacity style={styles.stylesContainer.containerHistory2}>
-                        <View style={styles.stylesContainer.requestIcons}>
+                      <TouchableOpacity style={styles.containerHistory}>
+                        <View style={styles.requestIcons}>
+                          <Text style={{ fontSize: 16, color: 'black', fontWeight: 'bold', marginHorizontal: 15}}>{request.title}</Text>
                           <Image style={{ width: 20, height: 20 }} source={require('../../assets/icons/editar.png')} />
                           <Image style={{ width: 20, height: 20 }} source={require('../../assets/icons/bloquear.png')} />
                           <Image style={{ width: 20, height: 20 }} source={require('../../assets/icons/eliminar.png')} />
                         </View>
-                        <Text style={{ fontSize: 14, color: 'black', fontWeight: 'bold', marginHorizontal: 15}}>{request.title}</Text>
-                        <Text style={{ fontSize: 12, color: 'black', marginHorizontal: 15}}>{request.description}</Text>
-                        <View style={{ flexDirection: 'row', alignItems: 'center'}}>
-                          <Text style={{ fontSize: 12, color: 'black', marginRight: 5}}>{request.owner.username}</Text>
-                          <Text style={{ fontSize: 12, color: 'black', marginHorizontal: 5}}>{request.price}</Text>
-                          <Image style={{ width: 20, height: 20 }} source={require('../../assets/logoSFtfg.png')} />
+                        <Text style={{ fontSize: 13, color: 'black', marginHorizontal: 15 }}>{request.description}</Text>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                          <Text style={{ fontSize: 13, color: 'black', marginRight: 5 }}>{request.owner.username}</Text>
+                          <Text style={{ fontSize: 13, color: 'black', marginHorizontal: 5 }}>{request.price}</Text>
+                          <Image style={{ width: 20, height: 20 }} source={require('../../assets/monedaSinFondo.png')} />
                         </View>
                       </TouchableOpacity>
-                    </View>
                   );
                 })
               )}
               {!allRequest && (
                 <Text>No hay request para mostrar</Text>
               )}
-            </ScrollView>
-        )
+            </ScrollView></>
+          )
         }
       </View>
     </View>
     <Components.AppNavigator navigation={navigation} /></>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+  },
+  separator: {
+    width: Dimensions.get('window').width * 0.93,
+    height: 1,
+    backgroundColor: '#DCDCDC',
+    marginVertical: 25,
+    marginHorizontal: 5,
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
+  containerProfileTop: {
+    marginVertical: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    width: '100%',
+  },
+  containerDataUser: {
+    marginLeft: 20,
+  },
+  containerCoins: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    marginBottom: 10,
+  },
+  scroll: {
+    flex: 1,
+    paddingHorizontal: 20,
+    marginBottom: 10,
+  },
+  textDataUser: {
+    fontSize: 20,
+    color: '#000000',
+    fontWeight: 'bold',
+    alignContent: 'flex-start',
+  },
+  btmTouchableCoins: {
+    flexDirection: 'row',
+    marginVertical: 10,
+  },
+  textNumberProfile: {
+    fontSize: 16,
+    color: 'black',
+  },
+  textDate: {
+    fontSize: 12,
+    color: 'gray',
+  },
+  textProfileRequest: {
+    fontSize: 16,
+    color: 'black',
+  },
+  text: {
+    fontSize: 16,
+    color: 'black',
+    fontWeight: 'bold',
+    alignContent: 'flex-start',
+  },
+  profileImageUser: {
+    width: 80,
+    height: 80,
+    borderRadius: 50,
+    marginLeft: 10,
+  },
+  containerHistory: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 10,
+    elevation: 3,
+  },
+  requestIcons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+  },
+  containerRequest: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginVertical: 10,
+  },
+  textProfileOptons: {
+    fontSize: 16,
+    color: 'black',
+    marginRight: 10,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  textNumberProfileOptions: {
+    fontSize: 16,
+    marginRight: 15,
+    color: 'black',
+  },
+});
 
 export default UserPerfil;

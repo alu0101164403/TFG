@@ -11,13 +11,14 @@
 import React, { useContext } from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Image, LogBox, View} from 'react-native';
+import {ImageBackground, LogBox} from 'react-native';
 import {io} from 'socket.io-client';
 
 import AuthProvider from './src/provider/auth.provider';
 import Components from './src/components';
 import { AuthContext } from './src/context/auth.context';
-import styles from './src/styles';
+import { StyleSheet } from 'react-native';
+//import CustomHeaderTitle from './src/components/commons/customeHeader';
 
 // -----------------------  PILA DE NAVEGACIÓN DE LA APLICACIÓN --------------------- //
 
@@ -27,30 +28,32 @@ const Stack = createNativeStackNavigator();
 
 const socketIo = io('http://10.0.2.2:8080');
 
+
+
 const App = () => {
   const {isLoggedIn} = useContext(AuthContext);
 
   return (
     <AuthProvider>
       <NavigationContainer>
-        <Stack.Navigator screenOptions={screenOptions}>
+        <Stack.Navigator screenOptions={screenOptions} >
           { !isLoggedIn && (
             <Stack.Screen name="Welcome" component={Components.Welcome} options={{title: ''}} />
             )
           }
-          <Stack.Screen name="Home" component={Components.Home} />
-          <Stack.Screen name="Login" component={Components.Login} />
-          <Stack.Screen name="Register" component={Components.Register} />
-          <Stack.Screen name="Wallet" component={Components.Wallet} />
-          <Stack.Screen name="Profile" component={Components.Profile} />
-          <Stack.Screen name="ShowRequest" component={Components.ShowRequest} />
-          <Stack.Screen name="Shop" component={Components.Shop} />
-          <Stack.Screen name="Payment" component={Components.Payment} />
+          <Stack.Screen name="Home" component={Components.Home}  options={{title: ''}}/>
+          <Stack.Screen name="Login" component={Components.Login}  options={{title: ''}}/>
+          <Stack.Screen name="Register" component={Components.Register}  options={{title: ''}}/>
+          <Stack.Screen name="Wallet" component={Components.Wallet}  options={{title: ''}}/>
+          <Stack.Screen name="Profile" component={Components.Profile}  options={{title: ''}}/>
+          <Stack.Screen name="ShowRequest" component={Components.ShowRequest}  options={{title: ''}}/>
+          <Stack.Screen name="Shop" component={Components.Shop} options={{title: ''}} />
+          <Stack.Screen name="Payment" component={Components.Payment}  options={{title: ''}}/>
           <Stack.Screen name="ChatRoom">
-            {(props) => <Components.ChatRoom {...props} socketIo={socketIo} />}
+            {(props) => <Components.ChatRoom {...props} socketIo={socketIo}  options={{title: ''}}/>}
           </Stack.Screen>
           <Stack.Screen name="Chat">
-            {(props) => <Components.Chat {...props} socketIo={socketIo} />}
+            {(props) => <Components.Chat {...props} socketIo={socketIo}  options={{title: ''}}/>}
           </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
@@ -62,24 +65,17 @@ const App = () => {
 // ----------------------- customizar barra de navegación superior --------------------- //
 const screenOptions = {
   headerStyle: {
-    backgroundColor: '#f0f8ff',
+    backgroundColor: '#FFFFFF',
+    elevation: 2,
   },
- //headerTitle: () => <CustomHeaderTitle />,
   headerTintColor: '#000000',
   headerTitleStyle: {
     fontWeight: 'bold',
   },
   headerTitleAlign: 'center',
+  //headerTitle: () => <CustomHeaderTitle />,
 };
 
-const CustomHeaderTitle = () => {
-  return (
-    // eslint-disable-next-line react-native/no-inline-styles
-    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-      <Image style={styles.stylesImage.icon} source={require('./src/assets/logoSFtfg.png')} />
-    </View>
-  );
-};
 
 // ----------------------- fin customizar barra de navegación superior --------------------- //
 
