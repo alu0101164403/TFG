@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
 import Link from 'next/link'
 
 import {Auth} from '../../services/auth-services';

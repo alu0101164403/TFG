@@ -53,7 +53,7 @@ export default async function Wallet() {
             <p className="text-gray-600 text-base mx-2">{user.wallet.coins}</p>
           </div>
           <img
-            src="/logoSFtfg.png"
+            src="/monedaSinFondo.png"
             alt="Moneda imagen"
             className="w-7 h-7 rounded-full"
           />
@@ -69,9 +69,9 @@ export default async function Wallet() {
           </thead>
           <tbody>
             { Array.isArray(history) &&
-              history.map((item: any) => {
+              history.reverse().map((item: any) => {
                 return (
-                  <tr className="h-12">
+                  <tr className="h-12" key={item._id}>
                     <td className="w-1/3 px-4 py-2">{item.title}
                       <span className="w-1/3 px-4 py-2 italic">por {item.secondPerson}</span>
                     </td>

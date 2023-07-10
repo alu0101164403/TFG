@@ -55,7 +55,7 @@ export default function Profile() {
     <div className="flex min-h-full flex-1 flex-col items-center justify-center mx-6 my-6 px-6 py-10">
       <div className="flex items-center justify-center mx-4 my-4">
         <img
-          src="/avatar.png"
+          src="/user1.jpg"
           alt="Imagen de perfil"
           className="w-28 h-28 rounded-full"
         />
@@ -79,7 +79,7 @@ export default function Profile() {
           <p className="text-gray-600 text-base mx-2">{user.wallet.coins}</p>
         </div>
         <img
-          src="/logoSFtfg.png"
+          src="/monedaSinFondo.png"
           alt="Moneda imagen"
           className="w-7 h-7 rounded-full"
         />

@@ -83,7 +83,7 @@ export default function Home() {
                         <span className="ml-2 text-rose-400">{request.price}</span>
                         <img
                           className="hidden h-5 w-auto lg:block"
-                          src="/logoSFtfg.png"
+                          src="/monedaSinFondo.png"
                           alt="Your Company"
                         />
                       </h3>

@@ -83,7 +83,7 @@ export default function RequestsByUser({ isOpen, onClose, requests, title }: { i
                         <span className="ml-2 text-rose-400">{request.price}</span>
                         <img
                           className="hidden h-5 w-auto lg:block"
-                          src="/logoSFtfg.png"
+                          src="/monedaSinFondo.png"
                           alt="Your Company" />
                       </h3>
                       <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">{request.description}</p>
