@@ -76,7 +76,7 @@ const Wallet = ({navigation}: { navigation: NavigationProp<ParamListBase> }) => 
                       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <Text style={[styles.textProfileRequest, { marginRight: 20 }]}>por</Text>
                         <Text style={styles.textProfileRequest}>
-                          {(item.type === 'initial' || item.type === 'offer') ? item.secondPerson : user.username}
+                        {item.secondPerson}
                         </Text>
                       </View>
                       <View style={{ flexDirection: 'row', alignItems: 'center' }}>

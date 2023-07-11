@@ -44,21 +44,25 @@ const Payment = ({
       <TextInput
         style={styles.input}
         placeholder="Nombre Apellido Apellido"
+        placeholderTextColor="black"
         editable={false}
       />
       <TextInput
         style={styles.input}
         placeholder="Número de tarjeta"
+        placeholderTextColor="black"
         editable={false}
       />
       <TextInput
         style={styles.input}
         placeholder="Fecha de caducidad"
+        placeholderTextColor="black"
         editable={false}
       />
       <TextInput
         style={styles.input}
         placeholder="Número secreto"
+        placeholderTextColor="black"
         editable={false}
       />
       <Button title="Pagar" onPress={handlePayment} />
@@ -91,6 +95,7 @@ const styles = {
     borderColor: 'gray',
     marginBottom: 10,
     paddingLeft: 10,
+    color: 'black',
   },
   modalContainer: {
     flex: 1,
@@ -108,6 +113,7 @@ const styles = {
     fontSize: 18,
     marginBottom: 20,
     textAlign: 'center',
+    color: 'black',
   },
 };
 

@@ -110,6 +110,7 @@ const styles = {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 20,
+    color: 'black',
   },
   paymentButtons: {
     flexDirection: 'row',
@@ -132,6 +133,7 @@ const styles = {
   closeButtonText: {
     fontSize: 16,
     fontWeight: 'bold',
+    color: 'black',
   },
 };
 

@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
   forgot_button: {
     height: 30,
     marginBottom: 20,
+    color: 'black',
   },
   titleBtm: {
     fontWeight: 'bold',

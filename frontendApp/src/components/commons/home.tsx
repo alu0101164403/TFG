@@ -50,7 +50,7 @@ const Home = ({navigation}: { navigation: NavigationProp<ParamListBase> }) => {
           <View style={styles.separator} />
         </View>
         <ScrollView style={styles.scroll}>
-          {allRequest && allRequest.slice(0, 5).map(request => (
+          {allRequest && allRequest.reverse().slice(0, 10).map(request => (
             <View key={request._id} style={styles.container}>
               <TouchableOpacity
                 style={styles.containerHistory}
@@ -75,10 +75,10 @@ const Home = ({navigation}: { navigation: NavigationProp<ParamListBase> }) => {
         </ScrollView>
         <View style={styles.containerButtons}>
           <TouchableOpacity style={styles.btmSinBorde}>
-            <Text>Ver Ventas</Text>
+            <Text style={{ color: 'black' }}>Ver Ventas</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.btmSinBorde}>
-            <Text>Ver Solicitudes</Text>
+            <Text style={{ color: 'black' }}>Ver Solicitudes</Text>
           </TouchableOpacity>
         </View>
       </View>

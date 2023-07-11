@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 export default axios.create({
-  baseURL: 'http://10.0.2.2:8080',
-  //baseURL: 'https://tfg-production-0e48.up.railway.app',
+  //baseURL: 'http://10.0.2.2:8080',
+  baseURL: 'https://tfg-backend-ainoa.onrender.com/',
   headers: {
     'Content-type': 'application/json',
   },
