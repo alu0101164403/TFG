@@ -13,6 +13,7 @@ export interface User {
   id: string;
   email: string;
   wallet: Wallet;
+  accessToken: string;
 }
 
 interface AuthContextValue {

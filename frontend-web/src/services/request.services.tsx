@@ -1,5 +1,6 @@
 import {AxiosResponse} from 'axios';
 import http from '../../http-commons';
+import AuthHeader from './auth-header-token';
 
 export interface RequestData {
   owner: {id: string, username: string},
@@ -42,13 +43,13 @@ const getAllRequest = async (): Promise<AxiosResponse<RequestDataReceive[]>> => 
 };
 
 const editRequestById = async (idRequest:string): Promise<AxiosResponse<any, any>> => {
-  const datareq = await http.patch('/api/request/id/' + idRequest);
+  const datareq = await http.patch('/api/request/id/' + idRequest, { headers: AuthHeader() });
   console.log(datareq)
   return datareq;
 }
 
 const deleteRequestById = async (idRequest:string): Promise<AxiosResponse<any, any>> => {
-  return http.delete('/api/request/id/' + idRequest);
+  return http.delete('/api/request/id/' + idRequest, { headers: AuthHeader() });
 }
 
 export const RequestService = {

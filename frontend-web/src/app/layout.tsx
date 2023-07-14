@@ -1,8 +1,10 @@
+"use client";
 import './globals.css'
 import { Inter } from 'next/font/google'
 
 import Nav from './components/Nav'
 import AuthProvider from '@/provider/auth-provider'
+import { AuthVerify } from '@/services/auth-verify'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,6 +25,7 @@ export default function RootLayout({
             <Nav/>
           {children}
         </body>
+        <AuthVerify/>
       </html>
     </AuthProvider>
   )

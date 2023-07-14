@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Image } from '@rneui/base';
 import React, { useContext, useEffect, useState } from 'react';
-import {View, Text, ScrollView, ImageBackground, Dimensions, StyleSheet} from 'react-native';
+import {View, Text, ScrollView, Dimensions, StyleSheet} from 'react-native';
 
 import {AuthContext} from '../../context/auth.context';
 import Components from '../../components';

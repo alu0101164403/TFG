@@ -1,24 +1,23 @@
-/* const jwt = require("jsonwebtoken");
-const config = require("../config/auth.config.js");
+import jwt from "jsonwebtoken";
+import config from "../config/auth.config";
+import { Response, NextFunction } from "express";
 const { TokenExpiredError } = jwt;
-const User = require('../models/user.model');
 
-// errors
-const catchError = (err, res) => {
+// errores
+const catchError = (err: any, res: Response) => {
   if (err instanceof TokenExpiredError) {
     return res.status(401).send({ message: "Unauthorized! Access Token was expired!" });
   }
-
-  return res.sendStatus(401).send({ message: "Unauthorized!" });
+  return res.status(401).send({ message: "Unauthorized!" });
 }
 
 // verifica el toke enviado 
-exports.verifyToken = (req, res, next) => {
+const verifyToken = (req: any, res: Response, next: NextFunction) => {
   let token = req.headers["x-access-token"];
   if (!token) {
     return res.status(403).send({ message: "No token provided!" });
   }
-  jwt.verify(token, config.secret, (err, decoded) => {
+  jwt.verify(token, config.secret, (err: any, decoded: any) => {
     if (err) {
       return catchError(err, res);
     }
@@ -26,4 +25,7 @@ exports.verifyToken = (req, res, next) => {
     next();
   });
 };
- */
+
+export {
+  verifyToken,
+}

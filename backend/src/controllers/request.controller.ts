@@ -7,6 +7,7 @@ import mongoose, { ObjectId } from "mongoose";
 
 // CREATE 
 let create = async (req: Request, res: Response) => {
+	console.log('sdfsdF', req)
 	try {
 		const { type, title, description, category, owner, price} = req.body;
 		const newRequest: RequestDocument = new RequestSchema ({

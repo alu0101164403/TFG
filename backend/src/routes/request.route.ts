@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { requestController as request} from "../controllers";
+import { verifyToken } from "../middlerwares/auth";
 
 const requestRouter = Router();
 
@@ -11,9 +12,9 @@ requestRouter
 
 requestRouter
   .route("/id/:id")
-    .delete(request.deleteOne)
+    .delete([verifyToken], request.deleteOne)
     .get(request.find)
-    .patch(request.modify);
+    .patch([verifyToken], request.modify);
 
 requestRouter
   .route("/owner/:id")
