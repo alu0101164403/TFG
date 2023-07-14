@@ -1,4 +1,9 @@
 /* eslint-disable prettier/prettier */
+/**
+ * @file wallet.tsx
+ * @brief Wallet component.
+ * Este componente muestra el historial de transacciones de un usuario.
+*/
 import { Image } from '@rneui/base';
 import React, { useContext, useEffect, useState } from 'react';
 import {View, Text, ScrollView, Dimensions, StyleSheet} from 'react-native';
@@ -9,10 +14,15 @@ import TransactionService, { DataHistory } from '../../services/transaction.serv
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native';
 
+/**
+ * Componente Wallet.
+ */
 const Wallet = ({navigation}: { navigation: NavigationProp<ParamListBase> }) => {
   const {user} = useContext(AuthContext);
   const [history, setHistory] = useState<DataHistory[]>([]);
-
+/**
+ * Obtiene el historial de transacciones del usuario. Se actualiza cuando detecta cambios en los datos del usuario.
+ */
   useEffect(() => {
     async function getHistoryUser () {
       let historyUser;

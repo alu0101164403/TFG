@@ -1,3 +1,7 @@
+/**
+ * @file transaction.controller.ts
+ * @brief Controlador para las operaciones relacionadas con las transacciones.
+ */
 import { Request, Response } from "express";
 import { transactionServices as transaction } from "../services";
 import { userServices as user } from "../services";
@@ -6,9 +10,14 @@ import { walletServices as wallet } from "../services";
 
 import TransactionSchema, { TransactionDocument } from "../models/transaction.model";
 import mongoose from "mongoose";
-import { UserDocument } from "../models/user.model";
 
-
+/**
+ * Gestiona la transferencia de monedas entre dos usuarios.
+ * Crea la transaccion para los dos usuarios y actualiza los datos del historial y el numero de monedas para cada uno.
+ * @param {Request} req - Objeto con los datos del usuario y monto a añadir.
+ * @param {Response} res - Objeto de respuesta de Express.
+ * @returns {Promise<void>}
+ */
 const buy = async (req: Request, res: Response) => {
   const {buyer, sellerId, requestId} = req.body;
   // comprobar existencia usuarios y request
@@ -53,6 +62,13 @@ const buy = async (req: Request, res: Response) => {
   }
 }
 
+/**
+ * Añade monedas a la cartera de un usuario.
+ * Tras encontrar al usuario, crea la transaccion y actualiza la lista de transacciones del usuario y actualiza la cartera con el nuevo numero de monedas.
+ * @param {Request} req - Objeto con los datos del usuario y monto a añadir.
+ * @param {Response} res - Objeto de respuesta de Express.
+ * @returns {Promise<void>}
+ */
 let addCoins = async (req:Request, res: Response) => {
 	const { id } = req.params;
 	const { amount } = req.body;
@@ -82,7 +98,12 @@ let addCoins = async (req:Request, res: Response) => {
 	}
 }
 
-// CREATE 
+/**
+ * Crear y guarda una transacción.
+ * @param {Request} req - Objeto con los datos de la solicitud.
+ * @param {Response} res - Objeto de respuesta de Express.
+ * @returns {Promise<void>}
+ */
 let create = async (req: Request, res: Response) => {
 	try {
 		const { type, title, amount, secondPerson} = req.body;
@@ -99,7 +120,11 @@ let create = async (req: Request, res: Response) => {
 	}
 }
 
-// GET 
+/**
+ * Encuentra todas las transacciones.
+ * @param {Response} res - Objeto de respuesta de Express.
+ * @returns {Promise<void>}
+ */
 let getAll = async (req: Request, res: Response) => {
 	try {
 		const transactions = await transaction.getAll();
@@ -109,6 +134,12 @@ let getAll = async (req: Request, res: Response) => {
 	}
 }
 
+/**
+ * Encuentra una transacción por su ID.
+ * @param {Request} req - Objeto con los datos de la solicitud, el ID.
+ * @param {Response} res - Objeto de respuesta de Express.
+ * @returns {Promise<void>}
+ */
 let find = async (req: Request, res: Response) => {
 	try {
 		const { id } = req.params;
@@ -119,8 +150,12 @@ let find = async (req: Request, res: Response) => {
 	}
 }
 
-
-// DELETE 
+/**
+ * Elimina una transacción por su ID.
+ * @param {Request} req - Objeto con los datos de la solicitud, el ID.
+ * @param {Response} res - Objeto de respuesta de Express.
+ * @returns {Promise<void>}
+ */
 let deleteOne = async (req: Request, res: Response) => {
 	try {
 		const { id } = req.params;
@@ -131,6 +166,11 @@ let deleteOne = async (req: Request, res: Response) => {
 	}
 }
 
+/**
+ * Elimina todas las transacciones.
+ * @param {Response} res - Objeto de respuesta de Express.
+ * @returns {Promise<void>}
+ */
 let deleteAll = async (req: Request, res: Response) => {
 	try {
 		const count = await transaction.deleteAll();
@@ -140,7 +180,12 @@ let deleteAll = async (req: Request, res: Response) => {
 	}
 }
 
-// UPDATE
+/**
+ * Modifica una transacción por su ID.
+ * @param {Request} req - Objeto con los datos de la solicitud, el ID.
+ * @param {Response} res - Objeto de respuesta de Express.
+ * @returns {Promise<void>}
+ */
 let modify = async (req: Request, res: Response) => {
 	try {
 		const { id } = req.params;

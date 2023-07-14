@@ -1,4 +1,9 @@
 /* eslint-disable prettier/prettier */
+/**
+ * @file register.tsx
+ * @brief register component.
+ * Este componente muestra un formulario para registrar un usuario en la base de datos.
+*/
 import React, {useState} from 'react';
 import {
   Text,
@@ -12,13 +17,18 @@ import {
 import {Auth} from '../../services/auth-services';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 
+/**
+ * Componente Resgister.
+ */
 const Register = ({navigation}: { navigation: NavigationProp<ParamListBase> }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [credential, setCredntial] = useState('');
   const [password, setPassword] = useState('');
 
-
+/**
+ * Envia los datos del usuario y si va todo bien redirige a la pantalla de iniicar sesion.
+ */
   const handleSubmitPress = () => {
     const data = {
       username: username,

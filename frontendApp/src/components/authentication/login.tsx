@@ -1,4 +1,9 @@
 /* eslint-disable prettier/prettier */
+/**
+ * @file login.tsx
+ * @brief Login component.
+ * Este componente muestra un formulario para inciar sesion.
+*/
 import React, {useContext, useState} from 'react';
 import {
   Text,
@@ -12,13 +17,17 @@ import {
 import {Auth} from '../../services/auth-services';
 import {AuthContext} from '../../context/auth.context';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
-
+/**
+ * Componente Login.
+ */
 const Login = ({navigation}: { navigation: NavigationProp<ParamListBase> }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const {login} = useContext(AuthContext);
 
-
+/**
+ * Obtiene los datos del usuario si todo va bien y redirige a la página del home.
+ */
   const handleSubmitPress = () => {
     const data = {
       username: username,

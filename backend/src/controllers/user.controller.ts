@@ -1,3 +1,7 @@
+/**
+ * @file user.controller.ts
+ * @brief Controller de user. Gestiona las peticiones a la base de datos. Hace uso de la carpeta Services.
+ */
 import { Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import jwt from 'jsonwebtoken';
@@ -11,7 +15,14 @@ import { walletServices as wallet } from "../services";
 import { transactionServices as transaction } from "../services";
 import RequestSchema, { RequestDocument } from "../models/request.model";
 
-// POST
+/**
+ * Crea un usuario.
+ * Se crea una cartera nueva con un numero de monedas y la transaccion que lo indica, y se guarda el id de estos objetos en los datos del usuario.
+ * Se usa bcrypt para guardar la contraseña cifrada.
+ * @param {Request} req - Objeto con los datos del usuario.
+ * @param {Response} res - Objeto de respuesta de Express.
+ * @returns {Promise<void>}
+ */
 let register = async (req: Request, res: Response) => {	
 	try {
 		const { username, email, credential } = req.body;
@@ -44,8 +55,13 @@ let register = async (req: Request, res: Response) => {
 }
 
 
-
-// LOGIN
+/**
+ * Envía los datos para el inicio de sesión de un usuario.
+ * Se comprueba que existe el usuario y que la contraseña es correcta. Después envía la info necesaria del usuario como el token, cartera...
+ * @param {Request} req - Objeto con los datos del usuario.
+ * @param {Response} res - Objeto de respuesta de Express.
+ * @returns {Promise<void>}
+ */
 let login = async (req: Request, res: Response) => {
 	try {
 		const { username } =  req.body;
@@ -87,8 +103,12 @@ let login = async (req: Request, res: Response) => {
 }
 
 
-
-// DELETE 
+/**
+ * Elimina un usuario por su ID.
+ * @param {Request} req - Objeto con los datos del usuario, ID.
+ * @param {Response} res - Objeto de respuesta de Express.
+ * @returns {Promise<void>}
+ */
 let deleteUserById = async (req: Request, res: Response) => {
 	try {
 		const { id } = req.params;
@@ -106,7 +126,11 @@ let deleteUserById = async (req: Request, res: Response) => {
 	}
 }
 
-
+/**
+ * Elimina todos los usuarios.
+ * @param {Response} res - Objeto de respuesta de Express.
+ * @returns {Promise<void>}
+ */
 let deleteAllUsers = async (req: Request, res: Response) => {
 	try {
 		const count = await user.deleteAllUsers();
@@ -117,8 +141,12 @@ let deleteAllUsers = async (req: Request, res: Response) => {
 }
 
 
-
-// GET
+/**
+ * Encuentra un usuario por su ID.
+ * @param {Request} req - Objeto con los datos del usuario, ID.
+ * @param {Response} res - Objeto de respuesta de Express.
+ * @returns {Promise<void>}
+ */
 let findUserById = async (req: Request, res: Response) => {
 	try {
 		const { id } = req.params;
@@ -129,6 +157,11 @@ let findUserById = async (req: Request, res: Response) => {
 	}
 }
 
+/**
+ * Devuelve todos los usuario.
+ * @param {Response} res - Objeto de respuesta de Express.
+ * @returns {Promise<void>}
+ */
 let getAllUsers = async (req: Request, res: Response) => {
 	try {
 		const users = await user.getUsers();
@@ -138,6 +171,12 @@ let getAllUsers = async (req: Request, res: Response) => {
 	}
 }
 
+/**
+ * Busca un usuario por su Username.
+ * @param {Request} req - Objeto con los datos del usuario, username.
+ * @param {Response} res - Objeto de respuesta de Express.
+ * @returns {Promise<void>}
+ */
 let findUserByName = async (req: Request, res: Response) => {
 	try {
 		const { username } = req.params;
@@ -148,7 +187,12 @@ let findUserByName = async (req: Request, res: Response) => {
 	}
 }
 
-// PATCH
+/**
+ * Mofiica un usuario por su ID.
+ * @param {Request} req - Objeto con los datos del usuario, ID.
+ * @param {Response} res - Objeto de respuesta de Express.
+ * @returns {Promise<void>}
+ */
 let modifyUser = async (req: Request, res: Response) => {
 	try {
 		const { id } = req.params;

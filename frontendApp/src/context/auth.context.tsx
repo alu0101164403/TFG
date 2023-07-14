@@ -1,19 +1,30 @@
+/**
+ * @file auth.context.tsx
+ * @brief Context. Se encarga de compartir datos entre los componentes.
+ */
 import {AxiosResponse} from 'axios';
 import {createContext} from 'react';
 
+/**
+ * Interfaz que representa la billetera de un usuario.
+ */
 export interface Wallet {
   _id: string;
   coins: number;
   history: string[];
 }
-
+/**
+ * Interfaz que representa a un usuario.
+ */
 export interface User {
   username: string;
   id: string;
   email: string;
   wallet: Wallet;
 }
-
+/**
+ * Valores del contexto de autenticación.
+ */
 interface AuthContextValue {
   user: User | null;
   isLoggedIn: boolean;
@@ -23,7 +34,9 @@ interface AuthContextValue {
   updateWallet: (newWallet: AxiosResponse) => void;
   logout: () => void;
 }
-
+/**
+ * Contexto de autenticación.
+ */
 export const AuthContext = createContext<AuthContextValue>({
   user: null,
   isLoggedIn: false,

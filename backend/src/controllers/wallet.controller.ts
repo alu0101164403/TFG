@@ -1,3 +1,7 @@
+/**
+ * @file wallet.controller.ts
+ * @brief Controller de wallet. Gestiona las peticiones a la base de datos. Hace uso de la carpeta Services.
+ */
 import { Request, Response } from "express";
 import { walletServices as wallet } from "../services";
 import WalletSchema, { WalletDocument } from "../models/wallet.model";
@@ -6,7 +10,11 @@ import { transactionServices as transaction } from "../services";
 import TransactionSchema, { TransactionDocument } from "../models/transaction.model";
 
 
-// CREATE 
+/**
+ * Crea una cartera. Los datos se crean por defecto.
+ * @param {Response} res - Objeto de respuesta de Express.
+ * @returns {Promise<void>}
+ */
 let create = async (req: Request, res: Response) => {	
 	try {
 		const transactionCreated: TransactionDocument = await transaction.create(new TransactionSchema ({
@@ -25,7 +33,11 @@ let create = async (req: Request, res: Response) => {
 	}
 }
 
-// GET 
+/**
+ * Busca todas las carteras.
+ * @param {Response} res - Objeto de respuesta de Express.
+ * @returns {Promise<void>}
+ */
 let getAll = async (req: Request, res: Response) => {
 	try {
 		const wallets = await wallet.getAll();
@@ -35,6 +47,12 @@ let getAll = async (req: Request, res: Response) => {
 	}
 }
 
+/**
+ * Encuentra una cartera por su ID.
+ * @param {Request} req - Objeto con los datos de la cartera, ID.
+ * @param {Response} res - Objeto de respuesta de Express.
+ * @returns {Promise<void>}
+ */
 let find = async (req: Request, res: Response) => {
 	try {
 		const { id } = req.params;
@@ -46,7 +64,12 @@ let find = async (req: Request, res: Response) => {
 }
 
 
-// DELETE 
+/**
+ * Elimina una cartera por su ID.
+ * @param {Request} req - Objeto con los datos de la cartera, ID.
+ * @param {Response} res - Objeto de respuesta de Express.
+ * @returns {Promise<void>}
+ */
 let deleteOne = async (req: Request, res: Response) => {
 	try {
 		const { id } = req.params;
@@ -57,6 +80,11 @@ let deleteOne = async (req: Request, res: Response) => {
 	}
 }
 
+/**
+ * Elimina todas las carteras.
+ * @param {Response} res - Objeto de respuesta de Express.
+ * @returns {Promise<void>}
+ */
 let deleteAll = async (req: Request, res: Response) => {
 	try {
 		const count = await wallet.deleteAll();
@@ -66,7 +94,12 @@ let deleteAll = async (req: Request, res: Response) => {
 	}
 }
 
-// UPDATE
+/**
+ * Modifica una cartera por su ID.
+ * @param {Request} req - Objeto con los datos de la cartera modificada.
+ * @param {Response} res - Objeto de respuesta de Express.
+ * @returns {Promise<void>}
+ */
 let modify = async (req: Request, res: Response) => {
 	try {
 		const { id } = req.params;

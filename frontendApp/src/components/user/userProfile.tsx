@@ -1,4 +1,10 @@
 /* eslint-disable prettier/prettier */
+/**
+ * @file userPerfil.tsx
+ * @brief UserPerfil component.
+ * Este componente muestra el perfil de usuario con sus datos y las solicitudes relacionadas.
+ * También permite al usuario realizar acciones como cerrar sesión.
+ */
 import {Image} from '@rneui/base';
 import React, { useContext, useEffect, useState } from 'react';
 import {View, Text, TouchableOpacity, ScrollView, StyleSheet, Dimensions} from 'react-native';
@@ -8,7 +14,9 @@ import Components from '../';
 import { RequestDataReceive, RequestService } from '../../services/request.services';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 
-
+/**
+ * Componente UserPerfil.
+ */
 const UserPerfil = ({navigation}: { navigation: NavigationProp<ParamListBase> }) => {
   const {user, logout} = useContext(AuthContext);
   const [allRequest, setAllRequest] = useState<RequestDataReceive[]>([]);
@@ -16,12 +24,18 @@ const UserPerfil = ({navigation}: { navigation: NavigationProp<ParamListBase> })
   //const [isModalOpen, setIsModalOpen] = useState(false);
   let countRequests = 0, countOfferts = 0;
 
+  /**
+   * Verifica si hay un usuario autenticado.
+   * Si no hay usuario autenticado, redirige a la página de inicio de sesión.
+  */
   useEffect(() => {
     if (!user) {
       navigation.navigate('Login');
     }
   }, [navigation, user]);
-
+  /**
+   * Obtiene la lista de solicitudes del usuario para poder mostrarlas.
+  */
   useEffect(() => {
     if (user) {
       RequestService.getRequestsUser(user.id).then(data => {
@@ -33,7 +47,9 @@ const UserPerfil = ({navigation}: { navigation: NavigationProp<ParamListBase> })
       console.log('No hay usuarios autenticados');
     }
   }, [user]);
-
+  /**
+   * Contador de solicitudes activas.
+  */
   const count = () => {
     countRequests = 0;
     countOfferts = 0;
@@ -45,14 +61,18 @@ const UserPerfil = ({navigation}: { navigation: NavigationProp<ParamListBase> })
   };
 
   if (allRequest.length > 0) {count();}
-
+  /**
+   * Usa el context para cerrar la sesión del usuario al cliclar el botón correspondiente.
+  */
   const handleLogout = () => {
     logout();
     navigation.navigate('Login');
   };
-
+  /**
+   * Obtiene la lista de solicitudes del usuario para poder mostrarlas.
+  */
   if (!user) {
-    return null; // Evita renderizar el contenido del perfil si no hay usuario autenticado
+    return null;
   }
 
   return (

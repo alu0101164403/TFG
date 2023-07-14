@@ -1,3 +1,8 @@
+/**
+ * @file db.config.ts
+ * @brief Datos para la conexión a la base de datos MongoDB.
+ */
+
 const user = "admin";
 const password = "admin";
 
