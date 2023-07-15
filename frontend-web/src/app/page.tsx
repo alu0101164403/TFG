@@ -12,7 +12,7 @@ export default function Home() {
   const [selectedRequest, setSelectedRequest] = useState<RequestDataReceive | null>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  console.log('logg', isLoggedIn)
   useEffect(() => {
     const fetchAllRequests = async () => {
       try {

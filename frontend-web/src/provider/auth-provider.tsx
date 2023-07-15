@@ -13,6 +13,7 @@ const AuthProvider = ({children}: Props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const login = (userData: AxiosResponse) => {
+    console.log('user', userData)
     setUser(userData.data);
     setIsLoggedIn(true);
   };
