@@ -1,4 +1,4 @@
-/* const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const config = require("../config/auth.config.js");
 const { TokenExpiredError } = jwt;
 const User = require('../models/user.model');
@@ -26,4 +26,3 @@ exports.verifyToken = (req, res, next) => {
     next();
   });
 };
- */
